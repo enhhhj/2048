@@ -13,9 +13,9 @@ public class Main {
             grid.printNumber();
 
             // 执行向右移动操作
-           // grid.moveRight();
-           // grid.moveLeft();
-            //grid.moveUp();
+            grid.moveRight();
+            grid.moveLeft();
+            grid.moveUp();
             grid.moveDown();
 
             // 打印移动后的状态

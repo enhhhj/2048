@@ -81,7 +81,7 @@ public class GridNumber {
                 numbers[i][n]=news1.get(numbers[i].length-n-1);
             }
         }
-        if(numbers.equals(A)) {
+        if(!numbers.equals(A)) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -153,7 +153,7 @@ public class GridNumber {
             {numbers[i][n]=news1.get(n);
             }
         }
-        if(numbers.equals(A)) {
+        if(!numbers.equals(A)) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -222,7 +222,7 @@ public class GridNumber {
                 numbers[n][i]=news1.get(n);
             }
         }
-        if(numbers.equals(A)) {
+        if(!numbers.equals(A)) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -288,7 +288,7 @@ public class GridNumber {
             {numbers[n][i]=news1.get(numbers[i].length-n-1);
             }
         }
-        if(numbers.equals(A)) {
+        if(!numbers.equals(A)) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
