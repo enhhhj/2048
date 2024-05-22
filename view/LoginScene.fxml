@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="360.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameFrame">
+   <children>
+      <Button fx:id="Button_login" layoutX="194.0" layoutY="263.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="55.0" text="login " />
+      <Label fx:id="Label_username" layoutX="112.0" layoutY="119.0" prefHeight="15.0" prefWidth="60.0" text="username" />
+      <TextField fx:id="Input_username" layoutX="231.0" layoutY="115.0" promptText="email/name" />
+      <Label fx:id="Label_password" layoutX="114.0" layoutY="173.0" text="password" />
+      <TextField fx:id="Input_password" layoutX="231.0" layoutY="169.0" promptText="set your password" />
+      <Label fx:id="Label_password2" layoutX="80.0" layoutY="219.0" text="check your password" />
+      <TextField fx:id="Imput_password2" layoutX="231.0" layoutY="215.0" promptText="Enter your password again" />
+   </children>
+</AnchorPane>
