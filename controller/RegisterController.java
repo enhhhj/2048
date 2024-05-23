@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class RegisterContorller {
+public class RegisterController {
 
     @FXML
     private Button Button_register;
@@ -22,5 +22,7 @@ public class RegisterContorller {
 
     @FXML
     private TextField TextField_username;
+
+    public
 
 }
