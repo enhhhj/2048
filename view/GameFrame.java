@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import javafx.scene.control.Button;
 import util.ColorMap;
 
 import javax.swing.*;
@@ -61,5 +62,4 @@ public class GameFrame extends JFrame {
         this.add(label);
         return label;
     }
-
 }
