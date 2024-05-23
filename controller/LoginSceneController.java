@@ -5,13 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class LoginSceneContorller {
+public class LoginSceneController {
 
     @FXML
     private Button Button_login;
 
     @FXML
-    private TextField Imput_password2;
+    private TextField Input_password2;
 
     @FXML
     private TextField Input_password;
