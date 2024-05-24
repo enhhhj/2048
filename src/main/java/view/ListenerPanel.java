@@ -1,9 +1,13 @@
 package src.main.java.view;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 /**
  * This class is to enable key events.
@@ -29,4 +33,23 @@ public abstract class ListenerPanel extends JPanel {
 
     public abstract void doMoveRight();
 
+    public static class Main extends Application {
+
+        @Override
+        public void start(Stage primaryStage) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/YourFXMLFile.fxml"));
+                Scene scene = new Scene(loader.load());
+                primaryStage.setScene(scene);
+                primaryStage.setTitle("2048 Game");
+                primaryStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static void main(String[] args) {
+            launch(args);
+        }
+    }
 }

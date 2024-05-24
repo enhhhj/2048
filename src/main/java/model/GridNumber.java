@@ -11,6 +11,8 @@ public class GridNumber {
 
     private int [][] numbers;
 
+    private int steps;
+
     static Random random = new Random();
 
     public GridNumber(int xCount, int yCount) {
@@ -18,6 +20,7 @@ public class GridNumber {
         this.Y_COUNT = yCount;
         this.numbers = new int[this.X_COUNT][this.Y_COUNT];
         this.initialNumbers();
+        this.steps=0;
     }
 
     public void initialNumbers() {
@@ -26,6 +29,7 @@ public class GridNumber {
                 this.numbers[i][j]=0;
             }
         }
+        int p = random.nextInt(2)+2;
         int a = random.nextInt(numbers.length) + 0;
         int b = random.nextInt(numbers[a].length) + 0;
         int c =random.nextInt(2) + 1;
@@ -34,13 +38,30 @@ public class GridNumber {
         }else{
             numbers[a][b] = 4;
         }
+        for(int i=0;i<p-1;i++){
+            while(numbers[a][b]!=0){
+                a = random.nextInt(numbers.length) + 0;
+                b = random.nextInt(numbers[a].length) + 0;
+            }
+            int d =random.nextInt(2) + 1;
+            if(d==1){
+                this.numbers[a][b] = 2;
+            }else{
+                this.numbers[a][b] = 4;
+            }
+        }
                 //todo: update generate numbers method
     }
 
 
     //todo: finish the method of four direction moving.
     public void moveRight() {
-        int [][] A = this.numbers;
+        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                A [i][j]=this.numbers[i][j];
+            }
+        }
         for (int i =0; i<numbers.length; i++) {
             int[] newRow = new int[numbers[i].length];
             ArrayList<Integer> news = new ArrayList<>();
@@ -81,8 +102,8 @@ public class GridNumber {
                 numbers[i][n]=news1.get(numbers[i].length-n-1);
             }
         }
-        if(numbers.equals(A)) {
-            //steps++;
+        if(!this.numbers.equals(A)) {
+            this.steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
             if(numbers[a][b]==0){
@@ -99,9 +120,9 @@ public class GridNumber {
                 }
                 int c =random.nextInt(2) + 1;
                 if(c==1){
-                    numbers[a][b] = 2;
+                    this.numbers[a][b] = 2;
                 }else{
-                    numbers[a][b] = 4;
+                    this.numbers[a][b] = 4;
                 }
             }
         }
@@ -109,7 +130,12 @@ public class GridNumber {
 
 
     public void moveLeft() {
-        int [][] A = this.numbers;
+        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                A [i][j]=this.numbers[i][j];
+            }
+        }
         for (int i =0; i<numbers.length; i++) {
             int[] newRow = new int[numbers[i].length];
             ArrayList<Integer> news = new ArrayList<>();
@@ -153,7 +179,7 @@ public class GridNumber {
             {numbers[i][n]=news1.get(n);
             }
         }
-        if(numbers.equals(A)) {
+        if(!numbers.equals(A)) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -181,7 +207,12 @@ public class GridNumber {
 
 
     public void moveUp() {
-        int [][] A = this.numbers;
+        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                A [i][j]=this.numbers[i][j];
+            }
+        }
         for (int i =0; i<numbers[0].length; i++) {
             int[] newRow = new int[numbers[0].length];
             ArrayList<Integer> news = new ArrayList<>();
@@ -222,7 +253,7 @@ public class GridNumber {
                 numbers[n][i]=news1.get(n);
             }
         }
-        if(numbers.equals(A)) {
+        if(!numbers.equals(A)) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -249,7 +280,12 @@ public class GridNumber {
     }
 
     public void moveDown() {
-        int [][] A = this.numbers;
+        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                A [i][j]=this.numbers[i][j];
+            }
+        }
         for (int i =0; i<numbers.length; i++) {
             int[] newRow = new int[numbers[0].length];
             ArrayList<Integer> news = new ArrayList<>();
@@ -288,7 +324,7 @@ public class GridNumber {
             {numbers[n][i]=news1.get(numbers[i].length-n-1);
             }
         }
-        if(numbers.equals(A)) {
+        if(!numbers.equals(A)) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -314,6 +350,66 @@ public class GridNumber {
         }
     }
 
+    public boolean ifsuccess(){
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[i].length; j++) {
+                if(this.numbers[i][j]==2048){
+                    return true;
+                    //游戏结束 弹出胜利
+                }
+            }
+        }
+        return false;
+        //游戏继续
+    }
+
+    public boolean iffailure(){
+        int a =0;
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[i].length; j++) {
+                if (this.numbers[i][j] == 0) {
+                    return false;
+                }
+            }
+        }
+
+        for (int i = 1; i < numbers.length-1; i++) {
+            for (int j = 1; j < numbers[i].length-1; j++) {
+                if(this.numbers[i][j]!=this.numbers[i-1][j] && this.numbers[i][j]!=this.numbers[i+1][j] && this.numbers[i][j]!=this.numbers[i][j-1] && this.numbers[i][j]!=this.numbers[i][j+1]){
+                    a++;
+                }
+            }
+        }
+        for (int i = 0; i < numbers.length-1; i++) {
+            if(this.numbers[i][0]!=this.numbers[i+1][0]){
+                a++;
+            }
+        }
+        for (int i = 0; i < numbers.length-1; i++) {
+            if(this.numbers[i][this.numbers[i].length-1]!=this.numbers[i+1][this.numbers[i+1].length-1]){
+                a++;
+            }
+        }
+        for (int i = 0; i < numbers[0].length-1; i++) {
+            if(this.numbers[0][i]!=this.numbers[0][i+1]){
+                a++;
+            }
+        }
+        for (int i = 0; i < numbers[this.numbers.length-1].length-1; i++) {
+            if(this.numbers[this.numbers.length-1][i]!=this.numbers[this.numbers.length-1][i+1]){
+                a++;
+            }
+        }
+        if(a==this.X_COUNT*this.Y_COUNT){
+            //游戏结束 弹出失败
+            return true;
+        }else{
+            //游戏继续
+            return false;
+        }
+
+
+    }
 
 
 

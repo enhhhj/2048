@@ -122,6 +122,9 @@ public class InterfaceController {
         updateGrid();
     }
 
+    public void setSizes(){
+
+    }
     public void updateGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -136,28 +139,28 @@ public class InterfaceController {
     @FXML
     private void handleButtonUp() {
         grid.moveUp();
-        steps++;
+
         updateGrid();
     }
 
     @FXML
     private void handleButtonDown() {
         grid.moveDown();
-        steps++;
+
         updateGrid();
     }
 
     @FXML
     private void handleButtonLeft() {
         grid.moveLeft();
-        steps++;
+
         updateGrid();
     }
 
     @FXML
     private void handleButtonRight() {
         grid.moveRight();
-        steps++;
+
         updateGrid();
     }
 
