@@ -33,7 +33,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.example.2048</mainClass>
+                    <mainClass>view.MainApp</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -43,7 +43,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.2048</mainClass>
+                            <mainClass>view.MainApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
