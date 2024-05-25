@@ -128,7 +128,7 @@ public class InterfaceController {
     public void updateGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                int number = grid.getNumber(i, j);
+                long number = grid.getNumber(i, j);
                 labels[i][j].setText(number == 0 ? "" : String.valueOf(number));
             }
         }

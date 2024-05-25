@@ -13,7 +13,7 @@ public class ColorMap {
         colorMap.put(2, Color.ORANGE);
     }
 
-    public static Color getColor(int i) {
+    public static Color getColor(long i) {
         return colorMap.getOrDefault(i, Color.black);
     }
 }

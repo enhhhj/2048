@@ -9,7 +9,7 @@ public class GridNumber {
     private final int X_COUNT;
     private final int Y_COUNT;
 
-    private int [][] numbers;
+    private long [][] numbers;
 
     private int steps;
 
@@ -18,7 +18,7 @@ public class GridNumber {
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
         this.Y_COUNT = yCount;
-        this.numbers = new int[this.X_COUNT][this.Y_COUNT];
+        this.numbers = new long[this.X_COUNT][this.Y_COUNT];
         this.initialNumbers();
         this.steps=0;
     }
@@ -32,7 +32,7 @@ public class GridNumber {
         int p = random.nextInt(2)+2;
         int a = random.nextInt(numbers.length) + 0;
         int b = random.nextInt(numbers[a].length) + 0;
-        int c =random.nextInt(2) + 1;
+        int c = random.nextInt(2) + 1;
         if(c==1){
             numbers[a][b] = 2;
         }else{
@@ -56,16 +56,16 @@ public class GridNumber {
 
     //todo: finish the method of four direction moving.
     public void moveRight() {
-        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        long [][] A = new long [this.X_COUNT][this.Y_COUNT];
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A[i].length; j++) {
-                A [i][j]=this.numbers[i][j];
+                A[i][j]=this.numbers[i][j];
             }
         }
         for (int i =0; i<numbers.length; i++) {
-            int[] newRow = new int[numbers[i].length];
-            ArrayList<Integer> news = new ArrayList<>();
-            ArrayList<Integer> news1 = new ArrayList<>();
+            long [] newRow = new long[numbers[i].length];
+            ArrayList<Long> news = new ArrayList<>();
+            ArrayList<Long> news1 = new ArrayList<>();
             for(int m =0; m<numbers[i].length; m++){
                 newRow[m]=numbers[i][m];
             }
@@ -79,8 +79,9 @@ public class GridNumber {
                 for(int m=0;m<news.size()-1;m++){
                     if(news.get(m)==news.get(m+1)){
                         news1.add(2*news.get(m));
-                        news.set(m,0);
-                        news.set(m+1,0);
+                        long t=0;
+                        news.set(m,t);
+                        news.set(m+1,t);
                     }
                     if(news.get(m)!=news.get(m+1) && news.get(m)!=0 ) {
                         news1.add(news.get(m));
@@ -96,13 +97,22 @@ public class GridNumber {
             int r=numbers[i].length-news1.size();
             for(int c=0;c<r;c++)
             {
-                news1.add(0);
+                long t = 0;
+                news1.add(t);
             }
             for(int n=0;n<numbers[i].length;n++) {
                 numbers[i][n]=news1.get(numbers[i].length-n-1);
             }
         }
-        if(!this.numbers.equals(A)) {
+        int count =0;
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                if(A[i][j]==this.numbers[i][j]){
+                    count++;
+                }
+            }
+        }
+        if(count<this.X_COUNT*this.Y_COUNT) {
             this.steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -128,18 +138,17 @@ public class GridNumber {
         }
     }
 
-
     public void moveLeft() {
-        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        long [][] A = new long[this.X_COUNT][this.Y_COUNT];
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A[i].length; j++) {
                 A [i][j]=this.numbers[i][j];
             }
         }
         for (int i =0; i<numbers.length; i++) {
-            int[] newRow = new int[numbers[i].length];
-            ArrayList<Integer> news = new ArrayList<>();
-            ArrayList<Integer> news1 = new ArrayList<>();
+            long[] newRow = new long[numbers[i].length];
+            ArrayList<Long> news = new ArrayList<>();
+            ArrayList<Long> news1 = new ArrayList<>();
             for(int m =0; m<numbers[i].length; m++){
                 newRow[m]=numbers[i][m];
             }
@@ -153,8 +162,9 @@ public class GridNumber {
                 for(int m=0;m<news.size()-1;m++){
                     if(news.get(m)==news.get(m+1)){
                         news1.add(2*news.get(m));
-                        news.set(m,0);
-                        news.set(m+1,0);
+                        long t=0;
+                        news.set(m,t);
+                        news.set(m+1,t);
                     }
                     if(news.get(m)!=news.get(m+1)&&news.get(m)!=0) {
                         news1.add(news.get(m));
@@ -172,14 +182,23 @@ public class GridNumber {
             int r=numbers[i].length-news1.size();
             for(int c=0;c<r;c++)
             {
-                news1.add(0);
+                long t=0;
+                news1.add(t);
             }
 
             for(int n=0;n<numbers[i].length;n++)
             {numbers[i][n]=news1.get(n);
             }
         }
-        if(!numbers.equals(A)) {
+        int count =0;
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                if(A[i][j]==this.numbers[i][j]){
+                    count++;
+                }
+            }
+        }
+        if(count<this.X_COUNT*this.Y_COUNT) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -205,18 +224,17 @@ public class GridNumber {
         }
     }
 
-
     public void moveUp() {
-        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        long [][] A = new long[this.X_COUNT][this.Y_COUNT];
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A[i].length; j++) {
                 A [i][j]=this.numbers[i][j];
             }
         }
         for (int i =0; i<numbers[0].length; i++) {
-            int[] newRow = new int[numbers[0].length];
-            ArrayList<Integer> news = new ArrayList<>();
-            ArrayList<Integer> news1 = new ArrayList<>();
+            long[] newRow = new long[numbers[0].length];
+            ArrayList<Long> news = new ArrayList<>();
+            ArrayList<Long> news1 = new ArrayList<>();
             for(int m =0; m<numbers[0].length; m++){
                 newRow[m]=numbers[m][i];
             }
@@ -230,8 +248,9 @@ public class GridNumber {
                 for (int m = 0; m < news.size() - 1; m++) {
                     if (news.get(m) == news.get(m + 1)) {
                         news1.add(2 * news.get(m));
-                        news.set(m, 0);
-                        news.set(m + 1, 0);
+                        long t=0;
+                        news.set(m, t);
+                        news.set(m + 1, t);
                     }
                     if (news.get(m) != news.get(m + 1) && news.get(m) != 0) {
                         news1.add(news.get(m));
@@ -246,14 +265,23 @@ public class GridNumber {
 
             int r=numbers[i].length-news1.size();
             for(int c=0;c<r;c++) {
-                news1.add(0);
+                long t=0;
+                news1.add(t);
             }
 
             for(int n=0;n<numbers[i].length;n++) {
                 numbers[n][i]=news1.get(n);
             }
         }
-        if(!numbers.equals(A)) {
+        int count =0;
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                if(A[i][j]==this.numbers[i][j]){
+                    count++;
+                }
+            }
+        }
+        if(count<this.X_COUNT*this.Y_COUNT) {
             //steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
@@ -280,16 +308,16 @@ public class GridNumber {
     }
 
     public void moveDown() {
-        int [][] A = new int[this.X_COUNT][this.Y_COUNT];
+        long [][] A = new long[this.X_COUNT][this.Y_COUNT];
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A[i].length; j++) {
                 A [i][j]=this.numbers[i][j];
             }
         }
         for (int i =0; i<numbers.length; i++) {
-            int[] newRow = new int[numbers[0].length];
-            ArrayList<Integer> news = new ArrayList<>();
-            ArrayList<Integer> news1 = new ArrayList<>();
+            long[] newRow = new long[numbers[0].length];
+            ArrayList<Long> news = new ArrayList<>();
+            ArrayList<Long> news1 = new ArrayList<>();
             for(int m =0; m<numbers[0].length; m++){
                 newRow[m]=numbers[m][i];
             }
@@ -303,8 +331,9 @@ public class GridNumber {
                 for(int m=0;m<news.size()-1;m++){
                     if(news.get(m)==news.get(m+1)){
                         news1.add(2*news.get(m));
-                        news.set(m,0);
-                        news.set(m+1,0);
+                        long t=0;
+                        news.set(m,t);
+                        news.set(m+1,t);
                     }
                     if(news.get(m)!=news.get(m+1)&&news.get(m)!=0) {
                         news1.add(news.get(m));
@@ -317,15 +346,24 @@ public class GridNumber {
             int r=numbers[0].length-news1.size();
             for(int c=0;c<r;c++)
             {
-                news1.add(0);
+                long t=0;
+                news1.add(t);
             }
 
             for(int n=0;n<numbers[i].length;n++)
             {numbers[n][i]=news1.get(numbers[i].length-n-1);
             }
         }
-        if(!numbers.equals(A)) {
-            //steps++;
+        int count =0;
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                if(A[i][j]==this.numbers[i][j]){
+                    count++;
+                }
+            }
+        }
+        if(count<this.X_COUNT*this.Y_COUNT) {
+            steps++;
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
             if(numbers[a][b]==0){
@@ -348,6 +386,10 @@ public class GridNumber {
                 }
             }
         }
+    }
+
+    public int getSteps(){
+        return this.steps;
     }
 
     public boolean ifsuccess(){
@@ -414,12 +456,12 @@ public class GridNumber {
 
 
 
-    public int getNumber(int i, int j) {
+    public long getNumber(int i, int j) {
         return numbers[i][j];
     }
 
     public void printNumber() {
-        for (int[] line : numbers) {
+        for (long[] line : numbers) {
             System.out.println(Arrays.toString(line));
         }
     }

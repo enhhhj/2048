@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class GamePanel extends ListenerPanel {
     private final int COUNT = 4;
-    private GridComponent[][] grids;
+    private GridComponent [][] grids;
 
     private GridNumber model;
     private JLabel stepLabel;
@@ -68,11 +68,13 @@ public class GamePanel extends ListenerPanel {
     }
 
     public void afterMove() {
-        this.steps++;
+        this.steps=model.getSteps();
         this.stepLabel.setText(String.format("Step: %d", this.steps));
     }
 
     public void setStepLabel(JLabel stepLabel) {
         this.stepLabel = stepLabel;
     }
+
+
 }

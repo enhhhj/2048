@@ -8,7 +8,7 @@ import java.awt.*;
 public class GridComponent extends JComponent {
     private int row;
     private int col;
-    private int number;
+    private long number;
     static Font font = new Font("Serif", Font.BOLD, 42);
 
     public GridComponent(int row, int col, int gridSize) {
@@ -18,7 +18,7 @@ public class GridComponent extends JComponent {
         this.number = 0;
     }
 
-    public GridComponent(int row, int col, int number, int gridSize) {
+    public GridComponent(int row, int col, long number, int gridSize) {
         this.setSize(gridSize, gridSize);
         this.row = row;
         this.col = col;
@@ -61,11 +61,11 @@ public class GridComponent extends JComponent {
         this.col = col;
     }
 
-    public int getNumber() {
+    public long getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(long number) {
         this.number = number;
     }
 }
