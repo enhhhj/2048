@@ -13,6 +13,8 @@ public class GridNumber {
 
     private int steps;
 
+    private boolean If;
+
     static Random random = new Random();
 
     public GridNumber(int xCount, int yCount) {
@@ -135,6 +137,8 @@ public class GridNumber {
                     this.numbers[a][b] = 4;
                 }
             }
+        }else{
+            this.If=false;
         }
     }
 
@@ -221,6 +225,8 @@ public class GridNumber {
                     numbers[a][b] = 4;
                 }
             }
+        }else{
+            this.If=false;
         }
     }
 
@@ -304,6 +310,8 @@ public class GridNumber {
                     numbers[a][b] = 4;
                 }
             }
+        }else{
+            this.If=false;
         }
     }
 
@@ -385,12 +393,22 @@ public class GridNumber {
                     numbers[a][b] = 4;
                 }
             }
+        }else{
+            this.If=false;
         }
     }
 
     public int getSteps(){
         return this.steps;
     }
+
+
+    public boolean ifMove(){
+        return this.If;
+        //false 代表无法移动 弹出提醒框 true 代表可以继续
+        //在每次点击进行了move方法后再进行判断是否弹出提醒框
+    }
+
 
     public boolean ifsuccess(){
         for (int i = 0; i < numbers.length; i++) {
