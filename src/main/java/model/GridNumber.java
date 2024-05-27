@@ -11,7 +11,11 @@ public class GridNumber {
 
     private long [][] numbers;
 
+    private long [][] laststep;
+
     private int steps;
+
+    private int scores;
 
     private boolean If;
 
@@ -21,6 +25,7 @@ public class GridNumber {
         this.X_COUNT = xCount;
         this.Y_COUNT = yCount;
         this.numbers = new long[this.X_COUNT][this.Y_COUNT];
+        this.laststep = new long[this.X_COUNT][this.Y_COUNT];
         this.initialNumbers();
         this.steps=0;
     }
@@ -29,6 +34,11 @@ public class GridNumber {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers[i].length; j++) {
                 this.numbers[i][j]=0;
+            }
+        }
+        for (int i = 0; i < laststep.length; i++) {
+            for (int j = 0; j < laststep[i].length; j++) {
+                this.laststep[i][j]=0;
             }
         }
         int p = random.nextInt(2)+2;
@@ -81,6 +91,7 @@ public class GridNumber {
                 for(int m=0;m<news.size()-1;m++){
                     if(news.get(m)==news.get(m+1)){
                         news1.add(2*news.get(m));
+                        this.scores+=2*news.get(m);
                         long t=0;
                         news.set(m,t);
                         news.set(m+1,t);
@@ -116,6 +127,11 @@ public class GridNumber {
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
             this.steps++;
+            for (int i = 0; i < laststep.length; i++) {
+                for (int j = 0; j < laststep[i].length; j++) {
+                    this.laststep[i][j]=A[i][j];
+                }
+            }
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
             if(numbers[a][b]==0){
@@ -166,6 +182,7 @@ public class GridNumber {
                 for(int m=0;m<news.size()-1;m++){
                     if(news.get(m)==news.get(m+1)){
                         news1.add(2*news.get(m));
+                        this.scores+=2*news.get(m);
                         long t=0;
                         news.set(m,t);
                         news.set(m+1,t);
@@ -203,7 +220,12 @@ public class GridNumber {
             }
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
-            //steps++;
+            this.steps++;
+            for (int i = 0; i < laststep.length; i++) {
+                for (int j = 0; j < laststep[i].length; j++) {
+                    this.laststep[i][j]=A[i][j];
+                }
+            }
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
             if(numbers[a][b]==0){
@@ -254,6 +276,7 @@ public class GridNumber {
                 for (int m = 0; m < news.size() - 1; m++) {
                     if (news.get(m) == news.get(m + 1)) {
                         news1.add(2 * news.get(m));
+                        this.scores+=2*news.get(m);
                         long t=0;
                         news.set(m, t);
                         news.set(m + 1, t);
@@ -288,7 +311,12 @@ public class GridNumber {
             }
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
-            //steps++;
+            this.steps++;
+            for (int i = 0; i < laststep.length; i++) {
+                for (int j = 0; j < laststep[i].length; j++) {
+                    this.laststep[i][j]=A[i][j];
+                }
+            }
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
             if(numbers[a][b]==0){
@@ -339,6 +367,7 @@ public class GridNumber {
                 for(int m=0;m<news.size()-1;m++){
                     if(news.get(m)==news.get(m+1)){
                         news1.add(2*news.get(m));
+                        this.scores+=2*news.get(m);
                         long t=0;
                         news.set(m,t);
                         news.set(m+1,t);
@@ -371,7 +400,12 @@ public class GridNumber {
             }
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
-            steps++;
+            this.steps++;
+            for (int i = 0; i < laststep.length; i++) {
+                for (int j = 0; j < laststep[i].length; j++) {
+                    this.laststep[i][j]=A[i][j];
+                }
+            }
             int a = random.nextInt(numbers.length) + 0;
             int b = random.nextInt(numbers[a].length) + 0;
             if(numbers[a][b]==0){
@@ -401,12 +435,23 @@ public class GridNumber {
     public int getSteps(){
         return this.steps;
     }
-
+    public int getScores(){
+        return this.scores;
+    }
 
     public boolean ifMove(){
         return !this.If;
         //false 代表无法移动 弹出提醒框 true 代表可以继续
         //在每次点击进行了move方法后再进行判断是否弹出提醒框
+    }
+
+    public void Withdraw(){
+        for (int i = 0; i < this.numbers.length; i++) {
+            for (int j = 0; j < this.numbers[i].length; j++) {
+                this.numbers[i][j]=this.laststep[i][j];
+            }
+        }
+        //引用此方法后 numbers变为上一步的样子（没成功移动不记为一步） 需要再写一次打印 numbers
     }
 
 
