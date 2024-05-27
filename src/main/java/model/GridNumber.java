@@ -128,6 +128,7 @@ public class GridNumber {
             }
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
+            this.If=false;
             this.steps++;
             for (int i = 0; i < laststep.length; i++) {
                 for (int j = 0; j < laststep[i].length; j++) {
@@ -222,6 +223,7 @@ public class GridNumber {
             }
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
+            this.If=false;
             this.steps++;
             for (int i = 0; i < laststep.length; i++) {
                 for (int j = 0; j < laststep[i].length; j++) {
@@ -313,6 +315,7 @@ public class GridNumber {
             }
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
+            this.If=false;
             this.steps++;
             for (int i = 0; i < laststep.length; i++) {
                 for (int j = 0; j < laststep[i].length; j++) {
@@ -402,6 +405,7 @@ public class GridNumber {
             }
         }
         if(count<this.X_COUNT*this.Y_COUNT) {
+            this.If=false;
             this.steps++;
             for (int i = 0; i < laststep.length; i++) {
                 for (int j = 0; j < laststep[i].length; j++) {
