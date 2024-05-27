@@ -10,6 +10,7 @@ public class Information {
     private boolean Go;
     private boolean Run;
 
+    private long [][] record;
 
     public  Information(String name, String password){
         this.name = name;
@@ -22,7 +23,13 @@ public class Information {
         //每次创建新的账号时 Information player = new Information；
     }
 
+    public void setRecord(long [][] record){
+        this.record=record;
+    }
 
+    public long [][] getRecord(){
+        return this.record;
+    }
 
 
     public void Renovate(long score){
