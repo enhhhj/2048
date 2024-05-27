@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.controller.AllfieldsarerequiredController"  style="-fx-background-image: url('src/main/resource/images/Allfieldsarerequired.png'); -fx-background-size: cover;">
+   <children>
+      <Button fx:id="Button_Return" layoutX="173.0" layoutY="320.0" mnemonicParsing="false" text="return" onAction="#handleButtonReturn" />
+   </children>
+</AnchorPane>
