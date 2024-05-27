@@ -66,7 +66,14 @@ public class Storage {
         //若登录成功 用此方法调用该用户
     }
 
-
+    public Information findUser(String username) {
+        for (Information user : scoreStorage) {
+            if (user.getName().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
 
 
 }

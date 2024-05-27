@@ -6,6 +6,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.controller.GamefailController" style="-fx-background-image: url('src/main/resource/images/Gamefailpic.png'); -fx-background-size: cover;">
    <children>
-      <Button fx:id="Button_onemore" layoutX="145.0" layoutY="290.0" mnemonicParsing="false" text="One more game" onAction="#handleButtonOnemoregame"/>
+      <Button fx:id="Button_onemore" layoutX="145.0" layoutY="290.0" mnemonicParsing="false" text="One more game" onAction="#handleButtonOnemore"/>
    </children>
 </AnchorPane>

@@ -141,7 +141,7 @@ public class InterfaceController {
             }
         }
         Label_stepnum.setText(String.valueOf(grid.getSteps()));
-        Label_score.setText(String.valueOf(score));
+        Label_score.setText(String.valueOf(grid.getScores()));
     }
 
     @FXML
@@ -151,12 +151,11 @@ public class InterfaceController {
         updateGrid();
 
         if(grid.iffailure()){
-            showGameOverDialog();
-        }
-        /* if(grid.ifMove())
-        {
-            showReturnDialog();
-        }*/
+            showGameOverDialog();}
+            if(grid.ifMove())
+            {
+                showReturnDialog();
+            }
         if(grid.ifsuccess()){
             showGameSuccessDialog();
         }
@@ -171,10 +170,10 @@ public class InterfaceController {
         if(grid.iffailure()){
             showGameOverDialog();
         }
-        /* if(grid.ifMove())
+        if(grid.ifMove())
         {
             showReturnDialog();
-        }*/
+        }
         if(grid.ifsuccess()){
             showGameSuccessDialog();
         }
@@ -187,10 +186,10 @@ public class InterfaceController {
         if(grid.iffailure()){
             showGameOverDialog();
         }
-        /* if(grid.ifMove())
+        if(grid.ifMove())
         {
             showReturnDialog();
-        }*/
+        }
         if(grid.ifsuccess()){
             showGameSuccessDialog();
         }}
@@ -202,10 +201,10 @@ public class InterfaceController {
         if(grid.iffailure()){
             showGameOverDialog();
         }
-       /* if(grid.ifMove())
+       if(grid.ifMove())
         {
             showReturnDialog();
-        }*/
+        }
         if(grid.ifsuccess()){
             showGameSuccessDialog();
         }
@@ -247,8 +246,8 @@ public class InterfaceController {
         }
     }
 
-  /*  private void showReturnDialog() {
-        System.out.println("显示返回对话框");
+   private void showReturnDialog() {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Return.fxml"));
             Parent root = fxmlLoader.load();
@@ -261,7 +260,7 @@ public class InterfaceController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     private void showGameSuccessDialog() {
         try {
