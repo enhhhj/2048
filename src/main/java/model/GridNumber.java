@@ -1,538 +1,632 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package src.main.java.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class GridNumber {
     private final int X_COUNT;
     private final int Y_COUNT;
-
-    private long [][] numbers;
-
-    private long [][] laststep;
-
+    private int[][] numbers;
+    private int[][] laststep;
     private int steps;
-
     private int scores;
-
     private boolean If;
-
     static Random random = new Random();
 
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
         this.Y_COUNT = yCount;
-        this.numbers = new long[this.X_COUNT][this.Y_COUNT];
-        this.laststep = new long[this.X_COUNT][this.Y_COUNT];
+        this.numbers = new int[this.X_COUNT][this.Y_COUNT];
+        this.laststep = new int[this.X_COUNT][this.Y_COUNT];
         this.initialNumbers();
-        this.steps=0;
+        this.steps = 0;
     }
 
     public void initialNumbers() {
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = 0; j < numbers[i].length; j++) {
-                this.numbers[i][j]=0;
+        int p;
+        int a;
+        for(p = 0; p < this.numbers.length; ++p) {
+            for(a = 0; a < this.numbers[p].length; ++a) {
+                this.numbers[p][a] = 0;
             }
         }
-        for (int i = 0; i < laststep.length; i++) {
-            for (int j = 0; j < laststep[i].length; j++) {
-                this.laststep[i][j]=0;
+
+        for(p = 0; p < this.laststep.length; ++p) {
+            for(a = 0; a < this.laststep[p].length; ++a) {
+                this.laststep[p][a] = 0;
             }
         }
-        int p = random.nextInt(2)+2;
-        int a = random.nextInt(numbers.length) + 0;
-        int b = random.nextInt(numbers[a].length) + 0;
+
+        p = random.nextInt(2) + 2;
+        a = random.nextInt(this.numbers.length) + 0;
+        int b = random.nextInt(this.numbers[a].length) + 0;
         int c = random.nextInt(2) + 1;
-        if(c==1){
-            numbers[a][b] = 2;
-        }else{
-            numbers[a][b] = 4;
-        }
-        for(int i=0;i<p-1;i++){
-            while(numbers[a][b]!=0){
-                a = random.nextInt(numbers.length) + 0;
-                b = random.nextInt(numbers[a].length) + 0;
-            }
-            int d =random.nextInt(2) + 1;
-            if(d==1){
-                this.numbers[a][b] = 2;
-            }else{
-                this.numbers[a][b] = 4;
-            }
-        }
-        this.If=false;
+        this.numbers[a][b] = c;
 
+        for(int i = 0; i < p - 1; ++i) {
+            while(this.numbers[a][b] != 0) {
+                a = random.nextInt(this.numbers.length) + 0;
+                b = random.nextInt(this.numbers[a].length) + 0;
+            }
 
-                //todo: update generate numbers method
+            int d = random.nextInt(2) + 1;
+            this.numbers[a][b] = d;
+        }
+
+        this.If = false;
     }
 
-
-    //todo: finish the method of four direction moving.
     public void moveRight() {
-        long [][] A = new long [this.X_COUNT][this.Y_COUNT];
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                A[i][j]=this.numbers[i][j];
+        int[][] A = new int[this.X_COUNT][this.Y_COUNT];
+
+        int i;
+        int a;
+        for(i = 0; i < A.length; ++i) {
+            for(a = 0; a < A[i].length; ++a) {
+                A[i][a] = this.numbers[i][a];
             }
         }
-        for (int i =0; i<numbers.length; i++) {
-            long [] newRow = new long[numbers[i].length];
-            ArrayList<Long> news = new ArrayList<>();
-            ArrayList<Long> news1 = new ArrayList<>();
-            for(int m =0; m<numbers[i].length; m++){
-                newRow[m]=numbers[i][m];
+
+        for(i = 0; i < this.numbers.length; ++i) {
+            int[] newRow = new int[this.numbers[i].length];
+            ArrayList<Integer> news = new ArrayList();
+            ArrayList<Integer> news1 = new ArrayList();
+
+            int m;
+            for(m = 0; m < this.numbers[i].length; ++m) {
+                newRow[m] = this.numbers[i][m];
             }
 
-            for(int u=numbers[i].length-1;u>=0;u--){
-            if(newRow[u]!=0){
-                news.add(newRow[u]);
-            }}
+            for(m = this.numbers[i].length - 1; m >= 0; --m) {
+                if (newRow[m] != 0) {
+                    news.add(newRow[m]);
+                }
+            }
 
-            if(news.size()>1){
-                for(int m=0;m<news.size()-1;m++){
-                    if(news.get(m)==news.get(m+1)){
-                        news1.add(2*news.get(m));
-                        this.scores+=2*news.get(m);
-                        long t=0;
-                        news.set(m,t);
-                        news.set(m+1,t);
+            int k;
+            if (news.size() > 1) {
+                m = 0;
+
+                while(true) {
+                    if (m >= news.size() - 1) {
+                        if ((Integer)news.get(news.size() - 1) != 0) {
+                            news1.add((Integer)news.get(news.size() - 1));
+                        }
+                        break;
                     }
-                    if(news.get(m)!=news.get(m+1) && news.get(m)!=0 ) {
-                        news1.add(news.get(m));
+
+                    if (news.get(m) == news.get(m + 1)) {
+                        news1.add(1 + (Integer)news.get(m));
+                        k = 1;
+
+                        for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
+                            k *= 2;
+                        }
+
+                        this.scores += k;
+                        news.set(m, 0);
+                        news.set(m + 1, 0);
                     }
+
+                    if (news.get(m) != news.get(m + 1) && (Integer)news.get(m) != 0) {
+                        news1.add((Integer)news.get(m));
+                    }
+
+                    ++m;
                 }
-                if(news.get(news.size()-1)!=0){
-                    news1.add(news.get(news.size()-1));
-                }
             }
-            if(news.size()==1){
-                news1.add(news.get(0));
+
+            if (news.size() == 1) {
+                news1.add((Integer)news.get(0));
             }
-            int r=numbers[i].length-news1.size();
-            for(int c=0;c<r;c++)
-            {
-                long t = 0;
-                news1.add(t);
+
+            m = this.numbers[i].length - news1.size();
+
+            for(k = 0; k < m; ++k) {
+                news1.add(0);
             }
-            for(int n=0;n<numbers[i].length;n++) {
-                numbers[i][n]=news1.get(numbers[i].length-n-1);
-            }
-        }
-        int count =0;
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                if(A[i][j]==this.numbers[i][j]){
-                    count++;
-                }
+
+            for(k = 0; k < this.numbers[i].length; ++k) {
+                this.numbers[i][k] = (Integer)news1.get(this.numbers[i].length - k - 1);
             }
         }
-        if(count<this.X_COUNT*this.Y_COUNT) {
-            this.If=false;
-            this.steps++;
-            for (int i = 0; i < laststep.length; i++) {
-                for (int j = 0; j < laststep[i].length; j++) {
-                    this.laststep[i][j]=A[i][j];
+
+        i = 0;
+
+        int b;
+        for(a = 0; a < A.length; ++a) {
+            for(b = 0; b < A[a].length; ++b) {
+                if (A[a][b] == this.numbers[a][b]) {
+                    ++i;
                 }
             }
-            int a = random.nextInt(numbers.length) + 0;
-            int b = random.nextInt(numbers[a].length) + 0;
-            if(numbers[a][b]==0){
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    numbers[a][b] = 2;
-                }else{
-                    numbers[a][b] = 4;
-                }
-            }else{
-                while(numbers[a][b]!=0){
-                    a = random.nextInt(numbers.length) + 0;
-                    b = random.nextInt(numbers[a].length) + 0;
-                }
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    this.numbers[a][b] = 2;
-                }else{
-                    this.numbers[a][b] = 4;
-                }
-            }
-        }else{
-            this.If=true;
         }
+
+        if (i < this.X_COUNT * this.Y_COUNT) {
+            this.If = false;
+            ++this.steps;
+
+            for(a = 0; a < this.laststep.length; ++a) {
+                for(b = 0; b < this.laststep[a].length; ++b) {
+                    this.laststep[a][b] = A[a][b];
+                }
+            }
+
+            a = random.nextInt(this.numbers.length) + 0;
+            b = random.nextInt(this.numbers[a].length) + 0;
+            int c;
+            if (this.numbers[a][b] == 0) {
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
+            } else {
+                while(this.numbers[a][b] != 0) {
+                    a = random.nextInt(this.numbers.length) + 0;
+                    b = random.nextInt(this.numbers[a].length) + 0;
+                }
+
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
+            }
+        } else {
+            this.If = true;
+        }
+
     }
 
     public void moveLeft() {
-        long [][] A = new long[this.X_COUNT][this.Y_COUNT];
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                A [i][j]=this.numbers[i][j];
+        int[][] A = new int[this.X_COUNT][this.Y_COUNT];
+
+        int i;
+        int a;
+        for(i = 0; i < A.length; ++i) {
+            for(a = 0; a < A[i].length; ++a) {
+                A[i][a] = this.numbers[i][a];
             }
         }
-        for (int i =0; i<numbers.length; i++) {
-            long[] newRow = new long[numbers[i].length];
-            ArrayList<Long> news = new ArrayList<>();
-            ArrayList<Long> news1 = new ArrayList<>();
-            for(int m =0; m<numbers[i].length; m++){
-                newRow[m]=numbers[i][m];
+
+        for(i = 0; i < this.numbers.length; ++i) {
+            int[] newRow = new int[this.numbers[i].length];
+            ArrayList<Integer> news = new ArrayList();
+            ArrayList<Integer> news1 = new ArrayList();
+
+            int m;
+            for(m = 0; m < this.numbers[i].length; ++m) {
+                newRow[m] = this.numbers[i][m];
             }
 
-            for(int u=0;u<numbers[i].length;u++){
-                if(newRow[u]!=0){
-                    news.add(newRow[u]);
-                }}
+            for(m = 0; m < this.numbers[i].length; ++m) {
+                if (newRow[m] != 0) {
+                    news.add(newRow[m]);
+                }
+            }
 
-            if(news.size() >1){
-                for(int m=0;m<news.size()-1;m++){
-                    if(news.get(m)==news.get(m+1)){
-                        news1.add(2*news.get(m));
-                        this.scores+=2*news.get(m);
-                        long t=0;
-                        news.set(m,t);
-                        news.set(m+1,t);
+            int k;
+            if (news.size() > 1) {
+                m = 0;
+
+                while(true) {
+                    if (m >= news.size() - 1) {
+                        if ((Integer)news.get(news.size() - 1) != 0) {
+                            news1.add((Integer)news.get(news.size() - 1));
+                        }
+                        break;
                     }
-                    if(news.get(m)!=news.get(m+1)&&news.get(m)!=0) {
-                        news1.add(news.get(m));
+
+                    if (news.get(m) == news.get(m + 1)) {
+                        news1.add(1 + (Integer)news.get(m));
+                        k = 1;
+
+                        for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
+                            k *= 2;
+                        }
+
+                        this.scores += k;
+                        news.set(m, 0);
+                        news.set(m + 1, 0);
                     }
+
+                    if (news.get(m) != news.get(m + 1) && (Integer)news.get(m) != 0) {
+                        news1.add((Integer)news.get(m));
+                    }
+
+                    ++m;
                 }
-                if(news.get(news.size()-1)!=0){
-                    news1.add(news.get(news.size()-1));
-                }
-            }
-            if(news.size()==1){
-                news1.add(news.get(0));
             }
 
-
-            int r=numbers[i].length-news1.size();
-            for(int c=0;c<r;c++)
-            {
-                long t=0;
-                news1.add(t);
+            if (news.size() == 1) {
+                news1.add((Integer)news.get(0));
             }
 
-            for(int n=0;n<numbers[i].length;n++)
-            {numbers[i][n]=news1.get(n);
+            m = this.numbers[i].length - news1.size();
+
+            for(k = 0; k < m; ++k) {
+                news1.add(0);
+            }
+
+            for(k = 0; k < this.numbers[i].length; ++k) {
+                this.numbers[i][k] = (Integer)news1.get(k);
             }
         }
-        int count =0;
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                if(A[i][j]==this.numbers[i][j]){
-                    count++;
+
+        i = 0;
+
+        int b;
+        for(a = 0; a < A.length; ++a) {
+            for(b = 0; b < A[a].length; ++b) {
+                if (A[a][b] == this.numbers[a][b]) {
+                    ++i;
                 }
             }
         }
-        if(count<this.X_COUNT*this.Y_COUNT) {
-            this.If=false;
-            this.steps++;
-            for (int i = 0; i < laststep.length; i++) {
-                for (int j = 0; j < laststep[i].length; j++) {
-                    this.laststep[i][j]=A[i][j];
+
+        if (i < this.X_COUNT * this.Y_COUNT) {
+            this.If = false;
+            ++this.steps;
+
+            for(a = 0; a < this.laststep.length; ++a) {
+                for(b = 0; b < this.laststep[a].length; ++b) {
+                    this.laststep[a][b] = A[a][b];
                 }
             }
-            int a = random.nextInt(numbers.length) + 0;
-            int b = random.nextInt(numbers[a].length) + 0;
-            if(numbers[a][b]==0){
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    numbers[a][b] = 2;
-                }else{
-                    numbers[a][b] = 4;
+
+            a = random.nextInt(this.numbers.length) + 0;
+            b = random.nextInt(this.numbers[a].length) + 0;
+            int c;
+            if (this.numbers[a][b] == 0) {
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
+            } else {
+                while(this.numbers[a][b] != 0) {
+                    a = random.nextInt(this.numbers.length) + 0;
+                    b = random.nextInt(this.numbers[a].length) + 0;
                 }
-            }else{
-                while(numbers[a][b]!=0){
-                    a = random.nextInt(numbers.length) + 0;
-                    b = random.nextInt(numbers[a].length) + 0;
-                }
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    numbers[a][b] = 2;
-                }else{
-                    numbers[a][b] = 4;
-                }
+
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
             }
-        }else{
-            this.If=true;
+        } else {
+            this.If = true;
         }
+
     }
 
     public void moveUp() {
-        long [][] A = new long[this.X_COUNT][this.Y_COUNT];
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                A [i][j]=this.numbers[i][j];
+        int[][] A = new int[this.X_COUNT][this.Y_COUNT];
+
+        int i;
+        int a;
+        for(i = 0; i < A.length; ++i) {
+            for(a = 0; a < A[i].length; ++a) {
+                A[i][a] = this.numbers[i][a];
             }
         }
-        for (int i =0; i<numbers[0].length; i++) {
-            long[] newRow = new long[numbers[0].length];
-            ArrayList<Long> news = new ArrayList<>();
-            ArrayList<Long> news1 = new ArrayList<>();
-            for(int m =0; m<numbers[0].length; m++){
-                newRow[m]=numbers[m][i];
+
+        for(i = 0; i < this.numbers[0].length; ++i) {
+            int[] newRow = new int[this.numbers[0].length];
+            ArrayList<Integer> news = new ArrayList();
+            ArrayList<Integer> news1 = new ArrayList();
+
+            int m;
+            for(m = 0; m < this.numbers[0].length; ++m) {
+                newRow[m] = this.numbers[m][i];
             }
 
-            for(int u=0;u<numbers[0].length;u++){
-                if(newRow[u]!=0){
-                    news.add(newRow[u]);
-                }}
+            for(m = 0; m < this.numbers[0].length; ++m) {
+                if (newRow[m] != 0) {
+                    news.add(newRow[m]);
+                }
+            }
 
-            if(news.size() >1) {
-                for (int m = 0; m < news.size() - 1; m++) {
+            int k;
+            if (news.size() > 1) {
+                m = 0;
+
+                while(true) {
+                    if (m >= news.size() - 1) {
+                        if ((Integer)news.get(news.size() - 1) != 0) {
+                            news1.add((Integer)news.get(news.size() - 1));
+                        }
+                        break;
+                    }
+
                     if (news.get(m) == news.get(m + 1)) {
-                        news1.add(2 * news.get(m));
-                        this.scores+=2*news.get(m);
-                        long t=0;
-                        news.set(m, t);
-                        news.set(m + 1, t);
+                        news1.add(1 + (Integer)news.get(m));
+                        k = 1;
+
+                        for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
+                            k *= 2;
+                        }
+
+                        this.scores += k;
+                        news.set(m, 0);
+                        news.set(m + 1, 0);
                     }
-                    if (news.get(m) != news.get(m + 1) && news.get(m) != 0) {
-                        news1.add(news.get(m));
+
+                    if (news.get(m) != news.get(m + 1) && (Integer)news.get(m) != 0) {
+                        news1.add((Integer)news.get(m));
                     }
-                }
-                if (news.get(news.size() - 1) != 0) {
-                    news1.add(news.get(news.size() - 1));
-                }
-            }
-            if(news.size()==1){news1.add(news.get(0));}
 
-
-            int r=numbers[i].length-news1.size();
-            for(int c=0;c<r;c++) {
-                long t=0;
-                news1.add(t);
+                    ++m;
+                }
             }
 
-            for(int n=0;n<numbers[i].length;n++) {
-                numbers[n][i]=news1.get(n);
+            if (news.size() == 1) {
+                news1.add((Integer)news.get(0));
+            }
+
+            m = this.numbers[i].length - news1.size();
+
+            for(k = 0; k < m; ++k) {
+                news1.add(0);
+            }
+
+            for(k = 0; k < this.numbers[i].length; ++k) {
+                this.numbers[k][i] = (Integer)news1.get(k);
             }
         }
-        int count =0;
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                if(A[i][j]==this.numbers[i][j]){
-                    count++;
+
+        i = 0;
+
+        int b;
+        for(a = 0; a < A.length; ++a) {
+            for(b = 0; b < A[a].length; ++b) {
+                if (A[a][b] == this.numbers[a][b]) {
+                    ++i;
                 }
             }
         }
-        if(count<this.X_COUNT*this.Y_COUNT) {
-            this.If=false;
-            this.steps++;
-            for (int i = 0; i < laststep.length; i++) {
-                for (int j = 0; j < laststep[i].length; j++) {
-                    this.laststep[i][j]=A[i][j];
+
+        if (i < this.X_COUNT * this.Y_COUNT) {
+            this.If = false;
+            ++this.steps;
+
+            for(a = 0; a < this.laststep.length; ++a) {
+                for(b = 0; b < this.laststep[a].length; ++b) {
+                    this.laststep[a][b] = A[a][b];
                 }
             }
-            int a = random.nextInt(numbers.length) + 0;
-            int b = random.nextInt(numbers[a].length) + 0;
-            if(numbers[a][b]==0){
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    numbers[a][b] = 2;
-                }else{
-                    numbers[a][b] = 4;
+
+            a = random.nextInt(this.numbers.length) + 0;
+            b = random.nextInt(this.numbers[a].length) + 0;
+            int c;
+            if (this.numbers[a][b] == 0) {
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
+            } else {
+                while(this.numbers[a][b] != 0) {
+                    a = random.nextInt(this.numbers.length) + 0;
+                    b = random.nextInt(this.numbers[a].length) + 0;
                 }
-            }else{
-                while(numbers[a][b]!=0){
-                    a = random.nextInt(numbers.length) + 0;
-                    b = random.nextInt(numbers[a].length) + 0;
-                }
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    numbers[a][b] = 2;
-                }else{
-                    numbers[a][b] = 4;
-                }
+
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
             }
-        }else{
-            this.If=true;
+        } else {
+            this.If = true;
         }
+
     }
 
     public void moveDown() {
-        long [][] A = new long[this.X_COUNT][this.Y_COUNT];
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                A [i][j]=this.numbers[i][j];
+        int[][] A = new int[this.X_COUNT][this.Y_COUNT];
+
+        int i;
+        int a;
+        for(i = 0; i < A.length; ++i) {
+            for(a = 0; a < A[i].length; ++a) {
+                A[i][a] = this.numbers[i][a];
             }
         }
-        for (int i =0; i<numbers.length; i++) {
-            long[] newRow = new long[numbers[0].length];
-            ArrayList<Long> news = new ArrayList<>();
-            ArrayList<Long> news1 = new ArrayList<>();
-            for(int m =0; m<numbers[0].length; m++){
-                newRow[m]=numbers[m][i];
+
+        for(i = 0; i < this.numbers.length; ++i) {
+            int[] newRow = new int[this.numbers[0].length];
+            ArrayList<Integer> news = new ArrayList();
+            ArrayList<Integer> news1 = new ArrayList();
+
+            int m;
+            for(m = 0; m < this.numbers[0].length; ++m) {
+                newRow[m] = this.numbers[m][i];
             }
 
-            for(int u=numbers[0].length-1;u>=0;u--){
-                if(newRow[u]!=0){
-                    news.add(newRow[u]);
-                }}
+            for(m = this.numbers[0].length - 1; m >= 0; --m) {
+                if (newRow[m] != 0) {
+                    news.add(newRow[m]);
+                }
+            }
 
-            if(news.size() >1){
-                for(int m=0;m<news.size()-1;m++){
-                    if(news.get(m)==news.get(m+1)){
-                        news1.add(2*news.get(m));
-                        this.scores+=2*news.get(m);
-                        long t=0;
-                        news.set(m,t);
-                        news.set(m+1,t);
+            int k;
+            if (news.size() > 1) {
+                m = 0;
+
+                while(true) {
+                    if (m >= news.size() - 1) {
+                        if ((Integer)news.get(news.size() - 1) != 0) {
+                            news1.add((Integer)news.get(news.size() - 1));
+                        }
+                        break;
                     }
-                    if(news.get(m)!=news.get(m+1)&&news.get(m)!=0) {
-                        news1.add(news.get(m));
-                    }}if(news.get(news.size() - 1) != 0)
-                    news1.add(news.get(news.size()-1));
+
+                    if (news.get(m) == news.get(m + 1)) {
+                        news1.add(1 + (Integer)news.get(m));
+                        k = 1;
+
+                        for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
+                            k *= 2;
+                        }
+
+                        this.scores += k;
+                        news.set(m, 0);
+                        news.set(m + 1, 0);
+                    }
+
+                    if (news.get(m) != news.get(m + 1) && (Integer)news.get(m) != 0) {
+                        news1.add((Integer)news.get(m));
+                    }
+
+                    ++m;
+                }
             }
-            if(news.size()==1){news1.add(news.get(0));}
 
-
-            int r=numbers[0].length-news1.size();
-            for(int c=0;c<r;c++)
-            {
-                long t=0;
-                news1.add(t);
+            if (news.size() == 1) {
+                news1.add((Integer)news.get(0));
             }
 
-            for(int n=0;n<numbers[i].length;n++)
-            {numbers[n][i]=news1.get(numbers[i].length-n-1);
+            m = this.numbers[0].length - news1.size();
+
+            for(k = 0; k < m; ++k) {
+                news1.add(0);
+            }
+
+            for(k = 0; k < this.numbers[i].length; ++k) {
+                this.numbers[k][i] = (Integer)news1.get(this.numbers[i].length - k - 1);
             }
         }
-        int count =0;
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                if(A[i][j]==this.numbers[i][j]){
-                    count++;
+
+        i = 0;
+
+        int b;
+        for(a = 0; a < A.length; ++a) {
+            for(b = 0; b < A[a].length; ++b) {
+                if (A[a][b] == this.numbers[a][b]) {
+                    ++i;
                 }
             }
         }
-        if(count<this.X_COUNT*this.Y_COUNT) {
-            this.If=false;
-            this.steps++;
-            for (int i = 0; i < laststep.length; i++) {
-                for (int j = 0; j < laststep[i].length; j++) {
-                    this.laststep[i][j]=A[i][j];
+
+        if (i < this.X_COUNT * this.Y_COUNT) {
+            this.If = false;
+            ++this.steps;
+
+            for(a = 0; a < this.laststep.length; ++a) {
+                for(b = 0; b < this.laststep[a].length; ++b) {
+                    this.laststep[a][b] = A[a][b];
                 }
             }
-            int a = random.nextInt(numbers.length) + 0;
-            int b = random.nextInt(numbers[a].length) + 0;
-            if(numbers[a][b]==0){
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    numbers[a][b] = 2;
-                }else{
-                    numbers[a][b] = 4;
+
+            a = random.nextInt(this.numbers.length) + 0;
+            b = random.nextInt(this.numbers[a].length) + 0;
+            int c;
+            if (this.numbers[a][b] == 0) {
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
+            } else {
+                while(this.numbers[a][b] != 0) {
+                    a = random.nextInt(this.numbers.length) + 0;
+                    b = random.nextInt(this.numbers[a].length) + 0;
                 }
-            }else{
-                while(numbers[a][b]!=0){
-                    a = random.nextInt(numbers.length) + 0;
-                    b = random.nextInt(numbers[a].length) + 0;
-                }
-                int c =random.nextInt(2) + 1;
-                if(c==1){
-                    numbers[a][b] = 2;
-                }else{
-                    numbers[a][b] = 4;
-                }
+
+                c = random.nextInt(2) + 1;
+                this.numbers[a][b] = c;
             }
-        }else{
-            this.If=true;
+        } else {
+            this.If = true;
         }
+
     }
 
-    public int getSteps(){
+    public int getSteps() {
         return this.steps;
     }
-    public int getScores(){
+
+    public int getScores() {
         return this.scores;
     }
 
-    public boolean ifMove(){
-        return !this.If;
-        //false 代表无法移动 弹出提醒框 true 代表可以继续
-        //在每次点击进行了move方法后再进行判断是否弹出提醒框
+    public boolean ifMove() {
+        return this.If;
     }
 
-    public void Withdraw(){
-        for (int i = 0; i < this.numbers.length; i++) {
-            for (int j = 0; j < this.numbers[i].length; j++) {
-                this.numbers[i][j]=this.laststep[i][j];
+    public void Withdraw() {
+        for(int i = 0; i < this.numbers.length; ++i) {
+            for(int j = 0; j < this.numbers[i].length; ++j) {
+                this.numbers[i][j] = this.laststep[i][j];
             }
         }
-        //引用此方法后 numbers变为上一步的样子（没成功移动不记为一步） 需要再写一次打印 numbers
+
     }
 
-
-    public boolean ifsuccess(){
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = 0; j < numbers[i].length; j++) {
-                if(this.numbers[i][j]==2048){
+    public boolean ifsuccess() {
+        for(int i = 0; i < this.numbers.length; ++i) {
+            for(int j = 0; j < this.numbers[i].length; ++j) {
+                if (this.numbers[i][j] == 11) {
                     return true;
-                    //游戏结束 弹出胜利
                 }
             }
         }
+
         return false;
-        //游戏继续
     }
 
-    public boolean iffailure(){
-        int a =0;
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = 0; j < numbers[i].length; j++) {
+    public boolean iffailure() {
+        int a = 0;
+
+        int i;
+        int j;
+        for(i = 0; i < this.numbers.length; ++i) {
+            for(j = 0; j < this.numbers[i].length; ++j) {
                 if (this.numbers[i][j] == 0) {
                     return false;
                 }
             }
         }
 
-        for (int i = 1; i < numbers.length-1; i++) {
-            for (int j = 1; j < numbers[i].length-1; j++) {
-                if(this.numbers[i][j]!=this.numbers[i-1][j] && this.numbers[i][j]!=this.numbers[i+1][j] && this.numbers[i][j]!=this.numbers[i][j-1] && this.numbers[i][j]!=this.numbers[i][j+1]){
-                    a++;
+        for(i = 1; i < this.numbers.length - 1; ++i) {
+            for(j = 1; j < this.numbers[i].length - 1; ++j) {
+                if (this.numbers[i][j] != this.numbers[i - 1][j] && this.numbers[i][j] != this.numbers[i + 1][j] && this.numbers[i][j] != this.numbers[i][j - 1] && this.numbers[i][j] != this.numbers[i][j + 1]) {
+                    ++a;
                 }
             }
         }
-        for (int i = 0; i < numbers.length-1; i++) {
-            if(this.numbers[i][0]!=this.numbers[i+1][0]){
-                a++;
+
+        for(i = 0; i < this.numbers.length - 1; ++i) {
+            if (this.numbers[i][0] != this.numbers[i + 1][0]) {
+                ++a;
             }
         }
-        for (int i = 0; i < numbers.length-1; i++) {
-            if(this.numbers[i][this.numbers[i].length-1]!=this.numbers[i+1][this.numbers[i+1].length-1]){
-                a++;
+
+        for(i = 0; i < this.numbers.length - 1; ++i) {
+            if (this.numbers[i][this.numbers[i].length - 1] != this.numbers[i + 1][this.numbers[i + 1].length - 1]) {
+                ++a;
             }
         }
-        for (int i = 0; i < numbers[0].length-1; i++) {
-            if(this.numbers[0][i]!=this.numbers[0][i+1]){
-                a++;
+
+        for(i = 0; i < this.numbers[0].length - 1; ++i) {
+            if (this.numbers[0][i] != this.numbers[0][i + 1]) {
+                ++a;
             }
         }
-        for (int i = 0; i < numbers[this.numbers.length-1].length-1; i++) {
-            if(this.numbers[this.numbers.length-1][i]!=this.numbers[this.numbers.length-1][i+1]){
-                a++;
+
+        for(i = 0; i < this.numbers[this.numbers.length - 1].length - 1; ++i) {
+            if (this.numbers[this.numbers.length - 1][i] != this.numbers[this.numbers.length - 1][i + 1]) {
+                ++a;
             }
         }
-        if(a==this.X_COUNT*this.Y_COUNT){
-           //
+
+        if (a == this.X_COUNT * this.Y_COUNT) {
             return true;
-        }else{
-            //游戏继续
+        } else {
             return false;
         }
-
-
     }
 
-
-
-
     public long getNumber(int i, int j) {
-        return numbers[i][j];
+        return (long)this.numbers[i][j];
     }
 
     public void printNumber() {
-        for (long[] line : numbers) {
+        int[][] var1 = this.numbers;
+        int var2 = var1.length;
+
+        for(int var3 = 0; var3 < var2; ++var3) {
+            int[] line = var1[var3];
             System.out.println(Arrays.toString(line));
         }
+
     }
 }

@@ -127,12 +127,15 @@ public class InterfaceController {
         this.grid = grid;
         updateGrid();
     }
-
+    public static double logBase2(int x) {
+        return Math.log(x) / Math.log(2);
+    }
 
     public void updateGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int number = (int) grid.getNumber(i, j);
+                double logBase2 = logBase2(number);
                 if (number == 0) {
                     labels[i][j].setImage(null);
                 } else {
