@@ -1,12 +1,16 @@
 package src.main.java.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import src.main.java.model.GridNumber;
 
 public class InterfaceController {
@@ -124,13 +128,11 @@ public class InterfaceController {
         updateGrid();
     }
 
-    public void setSizes(){
 
-    }
     public void updateGrid() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                long number = grid.getNumber(i, j);
+                int number = (int) grid.getNumber(i, j);
                 if (number == 0) {
                     labels[i][j].setImage(null);
                 } else {
@@ -138,7 +140,7 @@ public class InterfaceController {
                 }
             }
         }
-        Label_stepnum.setText(String.valueOf(steps));
+        Label_stepnum.setText(String.valueOf(grid.getSteps()));
         Label_score.setText(String.valueOf(score));
     }
 
@@ -147,6 +149,17 @@ public class InterfaceController {
         grid.moveUp();
 
         updateGrid();
+
+        if(grid.iffailure()){
+            showGameOverDialog();
+        }
+        /* if(grid.ifMove())
+        {
+            showReturnDialog();
+        }*/
+        if(grid.ifsuccess()){
+            showGameSuccessDialog();
+        }
     }
 
     @FXML
@@ -154,20 +167,48 @@ public class InterfaceController {
         grid.moveDown();
 
         updateGrid();
+
+        if(grid.iffailure()){
+            showGameOverDialog();
+        }
+        /* if(grid.ifMove())
+        {
+            showReturnDialog();
+        }*/
+        if(grid.ifsuccess()){
+            showGameSuccessDialog();
+        }
     }
 
     @FXML
     private void handleButtonLeft() {
         grid.moveLeft();
-
         updateGrid();
-    }
+        if(grid.iffailure()){
+            showGameOverDialog();
+        }
+        /* if(grid.ifMove())
+        {
+            showReturnDialog();
+        }*/
+        if(grid.ifsuccess()){
+            showGameSuccessDialog();
+        }}
 
     @FXML
     private void handleButtonRight() {
         grid.moveRight();
-
         updateGrid();
+        if(grid.iffailure()){
+            showGameOverDialog();
+        }
+       /* if(grid.ifMove())
+        {
+            showReturnDialog();
+        }*/
+        if(grid.ifsuccess()){
+            showGameSuccessDialog();
+        }
     }
 
     @FXML
@@ -181,4 +222,61 @@ public class InterfaceController {
         // 结束游戏的逻辑
         // 需要你根据你的实际逻辑来实现
     }
+
+    public void resetGame() {
+        System.out.println("Resetting game...");
+        grid = new GridNumber(4, 4);
+        steps = 0;
+        score = 0;
+        updateGrid();
+
+    }
+
+    private void showGameOverDialog() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Gamefail.fxml"));
+            Parent root = fxmlLoader.load();
+            GamefailController controller = fxmlLoader.getController();
+            controller.setMainController(this); // 确保设置 mainController
+            Stage stage = new Stage();
+            stage.setTitle("游戏失败");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+  /*  private void showReturnDialog() {
+        System.out.println("显示返回对话框");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Return.fxml"));
+            Parent root = fxmlLoader.load();
+            ReturnController controller = fxmlLoader.getController();
+            controller.setMainController(this);
+            Stage stage = new Stage();
+            stage.setTitle("方向错啦");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    private void showGameSuccessDialog() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GameSuccess.fxml"));
+            Parent root = fxmlLoader.load();
+            GamefailController controller = fxmlLoader.getController();
+            controller.setMainController(this); // 确保设置 mainController
+            Stage stage = new Stage();
+            stage.setTitle("游戏成功");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

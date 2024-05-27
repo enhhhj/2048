@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="360.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameFrame">
+<AnchorPane prefHeight="360.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.controller.LoginSceneContorller">
    <children>
       <Button fx:id="Button_login" layoutX="194.0" layoutY="263.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="55.0" text="login " />
       <Label fx:id="Label_username" layoutX="112.0" layoutY="119.0" prefHeight="15.0" prefWidth="60.0" text="username" />

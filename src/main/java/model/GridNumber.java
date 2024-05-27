@@ -404,7 +404,7 @@ public class GridNumber {
 
 
     public boolean ifMove(){
-        return this.If;
+        return !this.If;
         //false 代表无法移动 弹出提醒框 true 代表可以继续
         //在每次点击进行了move方法后再进行判断是否弹出提醒框
     }
@@ -461,7 +461,7 @@ public class GridNumber {
             }
         }
         if(a==this.X_COUNT*this.Y_COUNT){
-            //游戏结束 弹出失败
+           //
             return true;
         }else{
             //游戏继续
