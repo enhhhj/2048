@@ -62,6 +62,8 @@ public class GridNumber {
                 this.numbers[a][b] = 4;
             }
         }
+        this.If=false;
+
                 //todo: update generate numbers method
     }
 
@@ -154,7 +156,7 @@ public class GridNumber {
                 }
             }
         }else{
-            this.If=false;
+            this.If=true;
         }
     }
 
@@ -248,7 +250,7 @@ public class GridNumber {
                 }
             }
         }else{
-            this.If=false;
+            this.If=true;
         }
     }
 
@@ -339,7 +341,7 @@ public class GridNumber {
                 }
             }
         }else{
-            this.If=false;
+            this.If=true;
         }
     }
 
@@ -428,7 +430,7 @@ public class GridNumber {
                 }
             }
         }else{
-            this.If=false;
+            this.If=true;
         }
     }
 
