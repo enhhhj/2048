@@ -6,6 +6,17 @@
     <groupId>com.example</groupId>
     <artifactId>javafx-2048</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>3.36.0.3</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>3.36.0.3</version>
+    </dependency>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

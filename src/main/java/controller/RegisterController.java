@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import src.main.java.model.Information;
 import src.main.java.model.Storage;
 
+import java.net.URL;
+
 public class RegisterController {
 
     @FXML
@@ -44,23 +46,42 @@ public class RegisterController {
         String password = PasswordField_password.getText();
 
         Information user = storage.findUser(username);
-        if (user != null && user.getPassword().equals(password)) {
+        if (storage.ifGetIn(username,password)) {
             // 登录成功
             System.out.println("Login successful");
             // 关闭登录窗口并打开主游戏界面
+            user = storage.findUser(username);
+            showGameScene(user);
             Stage stage = (Stage) Button_login.getScene().getWindow();
             stage.close();
-            openGameScene();
+
         } else {
             // 显示错误消息窗口
             showInvalidUsernameOrPasswordDialog();
         }
     }
+    private void showGameScene(Information user) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/interface.fxml"));
+            Parent root = fxmlLoader.load();
 
+            // 获取控制器实例
+            InterfaceController gameController = fxmlLoader.getController();
+            gameController.setUser(user);
+
+            Stage stage = new Stage();
+            stage.setTitle("2048 Game");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void handleButtonRegister() {
+
         // 打开注册界面
-        openloginScene();
+        openLoginScene();
     }
 
     private void openGameScene() {
@@ -76,13 +97,13 @@ public class RegisterController {
         }
     }
 
-    private void openloginScene() {
+    private void openLoginScene() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/LoginScene.fxml"));
             Parent root = fxmlLoader.load();
 
             Stage stage = new Stage();
-            stage.setTitle("Register");
+            stage.setTitle("Login");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -92,7 +113,8 @@ public class RegisterController {
 
     private void showInvalidUsernameOrPasswordDialog() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Invalidusernameorpassword.fxml"));
+            URL resource = getClass().getResource("/Invaliusernameorpassword.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(resource);
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Error");

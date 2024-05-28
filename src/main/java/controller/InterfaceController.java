@@ -12,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import src.main.java.model.GridNumber;
+import src.main.java.model.Information;
+import src.main.java.model.Storage;
 
 public class InterfaceController {
 
@@ -106,14 +108,32 @@ public class InterfaceController {
     private ImageView[][] labels;
     private int steps;
     private int score;
+    private Information user;
+
+    public void setUser(Information user) {
+        this.user = user;
+        // 从用户数据中加载游戏状态
+        loadGameState(user);
+    }
+
+    private void loadGameState(Information user) {
+        // 从用户的游戏状态字符串中解析出游戏状态，并初始化 grid 对象
+        String gameState = user.getGameState();
+        if (gameState != null && !gameState.isEmpty()) {
+            this.grid = GridNumber.fromString(gameState);
+        } else {
+            this.grid = new GridNumber(4, 4);
+        }
+        updateGrid();
+    }
 
     @FXML
     public void initialize() {
-        labels = new ImageView[][] {
-                { Label_num00, Label_num01, Label_num02, Label_num03 },
-                { Label_num10, Label_num11, Label_num12, Label_num13 },
-                { Label_num20, Label_num21, Label_num22, Label_num23 },
-                { Label_num30, Label_num31, Label_num32, Label_num33 }
+        labels = new ImageView[][]{
+                {Label_num00, Label_num01, Label_num02, Label_num03},
+                {Label_num10, Label_num11, Label_num12, Label_num13},
+                {Label_num20, Label_num21, Label_num22, Label_num23},
+                {Label_num30, Label_num31, Label_num32, Label_num33}
         };
         steps = 0;
         score = 0;
@@ -127,6 +147,7 @@ public class InterfaceController {
         this.grid = grid;
         updateGrid();
     }
+
     public static double logBase2(int x) {
         return Math.log(x) / Math.log(2);
     }
@@ -150,16 +171,15 @@ public class InterfaceController {
     @FXML
     private void handleButtonUp() {
         grid.moveUp();
-
         updateGrid();
 
-        if(grid.iffailure()){
-            showGameOverDialog();}
-            if(grid.ifMove())
-            {
-                showReturnDialog();
-            }
-        if(grid.ifsuccess()){
+        if (grid.iffailure()) {
+            showGameOverDialog();
+        }
+        if (grid.ifMove()) {
+            showReturnDialog();
+        }
+        if (grid.ifsuccess()) {
             showGameSuccessDialog();
         }
     }
@@ -167,17 +187,15 @@ public class InterfaceController {
     @FXML
     private void handleButtonDown() {
         grid.moveDown();
-
         updateGrid();
 
-        if(grid.iffailure()){
+        if (grid.iffailure()) {
             showGameOverDialog();
         }
-        if(grid.ifMove())
-        {
+        if (grid.ifMove()) {
             showReturnDialog();
         }
-        if(grid.ifsuccess()){
+        if (grid.ifsuccess()) {
             showGameSuccessDialog();
         }
     }
@@ -186,29 +204,30 @@ public class InterfaceController {
     private void handleButtonLeft() {
         grid.moveLeft();
         updateGrid();
-        if(grid.iffailure()){
+
+        if (grid.iffailure()) {
             showGameOverDialog();
         }
-        if(grid.ifMove())
-        {
+        if (grid.ifMove()) {
             showReturnDialog();
         }
-        if(grid.ifsuccess()){
+        if (grid.ifsuccess()) {
             showGameSuccessDialog();
-        }}
+        }
+    }
 
     @FXML
     private void handleButtonRight() {
         grid.moveRight();
         updateGrid();
-        if(grid.iffailure()){
+
+        if (grid.iffailure()) {
             showGameOverDialog();
         }
-       if(grid.ifMove())
-        {
+        if (grid.ifMove()) {
             showReturnDialog();
         }
-        if(grid.ifsuccess()){
+        if (grid.ifsuccess()) {
             showGameSuccessDialog();
         }
     }
@@ -221,8 +240,14 @@ public class InterfaceController {
 
     @FXML
     private void handleButtonEnd() {
-        // 结束游戏的逻辑
-        // 需要你根据你的实际逻辑来实现
+        // 更新用户的游戏状态
+        user.updateGameState(grid);
+        // 保存用户信息
+        Storage.getInstance().updateUser(user);
+
+        // 关闭游戏窗口
+        Stage stage = (Stage) Button_End.getScene().getWindow();
+        stage.close();
     }
 
     public void resetGame() {
@@ -231,7 +256,6 @@ public class InterfaceController {
         steps = 0;
         score = 0;
         updateGrid();
-
     }
 
     private void showGameOverDialog() {
@@ -249,8 +273,7 @@ public class InterfaceController {
         }
     }
 
-   private void showReturnDialog() {
-
+    private void showReturnDialog() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Return.fxml"));
             Parent root = fxmlLoader.load();
@@ -279,6 +302,4 @@ public class InterfaceController {
             e.printStackTrace();
         }
     }
-
-
 }

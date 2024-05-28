@@ -1,26 +1,26 @@
 package src.main.java.controller;
 
-import src.main.java.model.GridNumber;
-import src.main.java.view.GamePanel;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import src.main.java.model.Information;
 
-
-/**
- * This class is used for interactive with JButton in GameFrame.
- */
 public class GameController {
-    private GamePanel view;
-    private src.main.java.model.GridNumber model;
 
+    @FXML
+    private Label Label_username;
 
-    public GameController(GamePanel view, src.main.java.model.GridNumber model) {
-        this.view = view;
-        this.model = model;
+    @FXML
+    private Label Label_highestscore;
 
+    private Information user;
+
+    public void setUser(Information user) {
+        this.user = user;
+        displayUserData();
     }
-    public void restartGame() {
-        System.out.println("Do restart game here");
+
+    private void displayUserData() {
+        Label_username.setText(user.getName());
+        Label_highestscore.setText(String.valueOf(user.getHighestscore()));
     }
-
-    //todo: add other methods such as loadGame, saveGame...
-
 }

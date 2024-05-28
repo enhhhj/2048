@@ -5,12 +5,13 @@
 
 package src.main.java.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class GridNumber {
-    private final int X_COUNT;
+public class GridNumber implements Serializable {
+    private static final long serialVersionUID = 1L;    private final int X_COUNT;
     private final int Y_COUNT;
     private int[][] numbers;
     private int[][] laststep;
@@ -18,14 +19,28 @@ public class GridNumber {
     private int scores;
     private boolean If;
     static Random random = new Random();
+    private int[][] grid;
 
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
         this.Y_COUNT = yCount;
         this.numbers = new int[this.X_COUNT][this.Y_COUNT];
         this.laststep = new int[this.X_COUNT][this.Y_COUNT];
+        this.grid=new int[X_COUNT][Y_COUNT];
         this.initialNumbers();
         this.steps = 0;
+    }
+
+
+    public static GridNumber fromString(String gameState) {
+        GridNumber gridNumber = new GridNumber(4, 4); // 确保正确初始化 grid 数组
+        String[] values = gameState.split(",");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                gridNumber.grid[i][j] = Integer.parseInt(values[i * 4 + j]);
+            }
+        }
+        return gridNumber;
     }
 
     public void initialNumbers() {
@@ -628,5 +643,17 @@ public class GridNumber {
             System.out.println(Arrays.toString(line));
         }
 
+    }
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                sb.append(grid[i][j]);
+                if (i < 3 || j < 3) {
+                    sb.append(",");
+                }
+            }
+        }
+        return sb.toString();
     }
 }

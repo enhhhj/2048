@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import src.main.java.model.Information;
+import src.main.java.model.Storage;
 
 public class LoginSceneController {
 
@@ -33,6 +34,8 @@ public class LoginSceneController {
     @FXML
     private Label Label_username;
 
+    private Storage storage = Storage.getInstance(); // 使用单例模式的Storage实例
+
     @FXML
     private void handleLogin() {
         String username = Input_username.getText();
@@ -41,58 +44,23 @@ public class LoginSceneController {
 
         if (username.isEmpty() || password.isEmpty() || password2.isEmpty()) {
             showFXMLDialog("/Allfieldsarerequired.fxml", "Error");
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Allfieldsarerequired.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = (Stage) Button_login.getScene().getWindow();
-                stage.setScene(new Scene(root));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             return;
         }
 
         if (!password.equals(password2)) {
             showFXMLDialog("/passworddontmatch.fxml", "Error");
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/passworddontmatch.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = (Stage) Button_login.getScene().getWindow();
-                stage.setScene(new Scene(root));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             return;
         }
 
-        if (Information.userExists(username)) {
+        if (storage.userExists(username)) {
             showFXMLDialog("/nameexists.fxml", "Error");
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/nameexists.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = (Stage) Button_login.getScene().getWindow();
-                stage.setScene(new Scene(root));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             return;
         }
 
-        // Create new user and add to the list
         Information newUser = new Information(username, password);
-        Information.addUser(newUser);
+        storage.addUser(newUser);
         showFXMLDialog("/Usersuccessfullyregister.fxml", "Success");
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Usersuccessfullyregister.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) Button_login.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-
-
 
     private void showFXMLDialog(String fxmlFile, String title) {
         try {
@@ -106,7 +74,4 @@ public class LoginSceneController {
             e.printStackTrace();
         }
     }
-
-
-
 }

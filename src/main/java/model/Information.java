@@ -1,8 +1,11 @@
 package src.main.java.model;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Information {
+public class Information implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String name;
     private String password;
@@ -12,22 +15,24 @@ public class Information {
     private boolean Run;
 
     private long [][] record;
+    private String gameState;
 
     private static List<Information> users = new ArrayList<>();
 
-
-    public  Information(String name, String password){
+    public Information(String name, String password) {
         this.name = name;
         this.password = password;
         this.highestscore = 0;
         this.rank = 0;
-        this.Go=true;
-        this.Run=true;
-        //每次创建新的账号时 Information player = new Information；
+        this.Go = true;
+        this.Run = true;
+        // 每次创建新的账号时 Information player = new Information；
     }
+
     public static void addUser(Information user) {
         users.add(user);
     }
+
     public static boolean userExists(String name) {
         for (Information user : users) {
             if (user.getName().equals(name)) {
@@ -36,62 +41,63 @@ public class Information {
         }
         return false;
     }
-    public void setRecord(long [][] record){
-        this.record=record;
+
+    public void setRecord(long[][] record) {
+        this.record = record;
     }
 
-    public long [][] getRecord(){
+    public long[][] getRecord() {
         return this.record;
     }
 
-
-    public void Renovate(long score){
-        if(this.highestscore<score){
-            this.highestscore=score;
+    public void Renovate(long score) {
+        if (this.highestscore < score) {
+            this.highestscore = score;
         }
-
-        //每次结束一次游戏（失败结束或者成功结束或者关掉不保存？） player.Renovate 刷新一下最高分
-
+        // 每次结束一次游戏（失败结束或者成功结束或者关掉不保存？） player.Renovate 刷新一下最高分
     }
 
-    public void setRank(long rank){
-        this.rank=rank;
+    public void setRank(long rank) {
+        this.rank = rank;
     }
 
-    public void setGo(boolean go){
-        this.Go=go;
+    public void setGo(boolean go) {
+        this.Go = go;
     }
 
     public boolean getGo() {
         return Go;
-
-        //Go如果是true 成功创建 如果是false 创建失败 弹出重名提示
     }
 
-    public void setRun(boolean run){
-        this.Run=run;
+    public void setRun(boolean run) {
+        this.Run = run;
     }
 
-    public boolean getRun(){
+    public boolean getRun() {
         return this.Run;
-
-        //Run如果是true 成功创建 如果是false 创建失败 弹出密码太短提示
     }
 
-    public long getRank(){
+    public long getRank() {
         return this.rank;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return this.password;
     }
 
-    public long getHighestscore(){
+    public long getHighestscore() {
         return this.highestscore;
     }
 
+    public String getGameState() {
+        return this.gameState;
+    }
+
+    public void updateGameState(GridNumber grid) {
+        this.gameState = grid.toString();
+    }
 }
