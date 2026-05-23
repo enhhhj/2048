@@ -1,0 +1,67 @@
+# Build output
+target/
+out/
+build/
+dist/
+*.class
+
+# IDE and editor files
+.idea/
+*.iml
+.vscode/
+
+# Local runtime data
+storage.dat
+*.db
+*.sqlite
+*.sqlite3
+
+# Bundled dependency jars
+lib/*.jar
+*.jar
+
+# Logs and temporary files
+logs/
+*.log
+cache/
+tmp/
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# Large machine-learning/data artifacts
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.h5
+*.pkl
+*.joblib
+*.bin
+*.model
+*.csv
+*.tsv
+*.xlsx
+*.jsonl
+*.parquet
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.gz

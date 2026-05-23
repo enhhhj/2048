@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.controller.InterfaceController" style="-fx-background-image: url('/images/interfacepic.png'); -fx-background-size: cover;">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="731.0" style="-fx-background-image: url('/images/interfacepic.png'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.controller.InterfaceController">
     <children>
         <GridPane fx:id="GridPane_numbers" layoutX="14.0" layoutY="16.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-image: url('/images/numberpic.png'); -fx-background-size: cover;">
             <columnConstraints>
@@ -54,11 +54,13 @@
                 <Label fx:id="Label_stepnum" layoutX="46.0" layoutY="40.0" text="0" />
             </children>
         </AnchorPane>
-        <Button fx:id="Button_Up" layoutX="557.0" layoutY="270.0" mnemonicParsing="false" text="Up" onAction="#handleButtonUp"/>
-        <Button fx:id="Button_Left" layoutX="510.0" layoutY="304.0" mnemonicParsing="false" text="Left" onAction="#handleButtonLeft"/>
-        <Button fx:id="Button_Right" layoutX="598.0" layoutY="304.0" mnemonicParsing="false" text="Right" onAction="#handleButtonRight"/>
-        <Button fx:id="Button_Down" layoutX="549.0" layoutY="336.0" mnemonicParsing="false" text="Down" onAction="#handleButtonDown"/>
-        <Button fx:id="Button_withdraw" layoutX="533.0" layoutY="100.0" mnemonicParsing="false" text="withdraw" onAction="#handleButtonWithdraw"/>
-        <Button fx:id="Button_End" layoutX="520.0" layoutY="186.0" mnemonicParsing="false" text="End the game" onAction="#handleButtonEnd"/>
+        <Button fx:id="Button_Up" layoutX="557.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleButtonUp" text="Up" />
+        <Button fx:id="Button_Left" layoutX="510.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleButtonLeft" text="Left" />
+        <Button fx:id="Button_Right" layoutX="598.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleButtonRight" text="Right" />
+        <Button fx:id="Button_Down" layoutX="549.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleButtonDown" text="Down" />
+        <Button fx:id="Button_withdraw" layoutX="533.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonWithdraw" text="withdraw" />
+        <Button fx:id="Button_End" layoutX="520.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleButtonEnd" text="End the game" />
+      <Button fx:id="Button_dis" layoutX="493.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleButtondis" text="The disappearance of 2" />
+      <Button fx:id="Button_xiao" layoutX="501.0" layoutY="226.0" mnemonicParsing="false" text="Vanishing technique"  onAction="#handleButtonxiao"/>
     </children>
 </AnchorPane>

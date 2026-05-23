@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.controller.Game1Controller" style="-fx-background-image: url('src/main/resource/images/intropic.jpg'); -fx-background-size: cover;" >
+
+   <children>
+      <AnchorPane fx:id="AnchorPane_intro" layoutX="22.0" layoutY="16.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-image: url('src/main/resource/images/intro.jpg'); -fx-background-size: cover;" />
+      <Button fx:id="Button_simple" layoutX="528.0" layoutY="270.0" mnemonicParsing="false" text="Simple mode" onAction="#handleButtonsimple"/>
+      <Button fx:id="Button_normal" layoutX="527.0" layoutY="321.0" mnemonicParsing="false" text="normal mode" onAction="#handleButtonnormal" />
+      <Button fx:id="Button_hell" layoutX="534.0" layoutY="375.0" mnemonicParsing="false" text="Hell model" onAction="#handleButtonhell"/>
+      <Button fx:id="Button_fast" layoutX="509.0" layoutY="79.0" mnemonicParsing="false" text="Fastest leaderboard" />
+      <Button fx:id="Button_best" layoutX="534.0" layoutY="126.0" mnemonicParsing="false" text="Best List" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="817.0" style="-fx-background-image: url('images/inter2pic.png'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.main.java.controller.inter2Controller">
+    <children>
+        <GridPane fx:id="GridPane_numbers" layoutX="22.0" layoutY="16.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-image: url('images/inter2numpic.png'); -fx-background-size: cover;">
+            <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="99.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="101.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="Label_num10" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="1" />
+                <ImageView fx:id="Label_num30" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="3" />
+
+                <ImageView fx:id="Label_num11" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ImageView fx:id="Label_num21" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <ImageView fx:id="Label_num31" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                <ImageView fx:id="Label_num12" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ImageView fx:id="Label_num22" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <ImageView fx:id="Label_num32" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <ImageView fx:id="Label_num02" fitHeight="100.0" fitWidth="100.0" GridPane.rowIndex="2" />
+            <ImageView fx:id="Label_num14" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ImageView fx:id="Label_num04" fitHeight="100.0" fitWidth="100.0" GridPane.rowIndex="4" />
+            <ImageView fx:id="Label_num03" fitHeight="100.0" fitWidth="100.0" GridPane.rowIndex="3" />
+            <ImageView fx:id="Label_num24" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <ImageView fx:id="Label_num34" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <ImageView fx:id="Label_num44" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <ImageView fx:id="Label_num40" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="4" />
+            <ImageView fx:id="Label_num43" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <ImageView fx:id="Label_num13" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ImageView fx:id="Label_num23" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <ImageView fx:id="Label_num33" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <ImageView fx:id="Label_num01" fitHeight="100.0" fitWidth="100.0" GridPane.rowIndex="1" />
+            <ImageView fx:id="Label_num20" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="2" />
+            <ImageView fx:id="Label_num41" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ImageView fx:id="Label_num42" fitHeight="100.0" fitWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ImageView fx:id="Label_num00" fitHeight="100.0" fitWidth="100.0" />
+            </children>
+        </GridPane>
+        <AnchorPane fx:id="AnchorPane_score" layoutX="530.0" layoutY="14.0" prefHeight="69.0" prefWidth="121.0">
+            <children>
+                <Label layoutX="45.0" layoutY="7.0" text="score" />
+                <Label fx:id="Label_score" layoutX="45.0" layoutY="40.0" text="0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="AnchorPane_stepnum" layoutX="654.0" layoutY="14.0" prefHeight="69.0" prefWidth="121.0">
+            <children>
+                <Label layoutX="24.0" layoutY="7.0" text="step number" />
+                <Label fx:id="Label_stepnum" layoutX="46.0" layoutY="40.0" text="0" />
+            </children>
+        </AnchorPane>
+        <Button fx:id="Button_Up" layoutX="646.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleButtonUp" text="Up" />
+        <Button fx:id="Button_Left" layoutX="598.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleButtonLeft" text="Left" />
+        <Button fx:id="Button_Right" layoutX="697.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleButtonRight" text="Right" />
+        <Button fx:id="Button_Down" layoutX="638.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleButtonDown" text="Down" />
+        <Button fx:id="Button_withdraw" layoutX="629.0" layoutY="171.0" mnemonicParsing="false" onAction="#handleButtonWithdraw" text="withdraw" />
+        <Button fx:id="Button_End" layoutX="615.0" layoutY="286.0" mnemonicParsing="false" onAction="#handleButtonEnd" text="End the game" />
+      <Button fx:id="Button_dis" layoutX="588.0" layoutY="225.0" mnemonicParsing="false" text="The disappearance of 2" onAction="#handleButtondis" />
+      <Button fx:id="Button_xiao" layoutX="597.0" layoutY="346.0" mnemonicParsing="false" text="Vanishing technique" />
+    </children>
+</AnchorPane>

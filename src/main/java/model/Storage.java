@@ -29,11 +29,6 @@ public class Storage {
         return scoreStorage;
     }
 
-
-
-
-
-
     public void updateUser(Information user) {
         for (int i = 0; i < scoreStorage.size(); i++) {
             if (scoreStorage.get(i).getName().equals(user.getName())) {

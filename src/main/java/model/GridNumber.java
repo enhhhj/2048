@@ -11,15 +11,26 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class GridNumber implements Serializable {
-    private static final long serialVersionUID = 1L;    private final int X_COUNT;
+    private static final long serialVersionUID = 1L;
+    private final int X_COUNT ;
     private final int Y_COUNT;
     private int[][] numbers;
     private int[][] laststep;
     private int steps;
     private int scores;
+    private int lastscore;
     private boolean If;
     static Random random = new Random();
     private int[][] grid;
+
+    private int toolestimate2;
+    private int toolchangenumber;
+    private int changenumber;
+    private ArrayList<Integer> change;
+    private int change_x;
+    private int change_y;
+
+
 
     public GridNumber(int xCount, int yCount) {
         this.X_COUNT = xCount;
@@ -31,9 +42,30 @@ public class GridNumber implements Serializable {
         this.steps = 0;
     }
 
-
-    public static GridNumber fromString(String gameState) {
+    public static GridNumber fromString1(String gameState) {
         GridNumber gridNumber = new GridNumber(4, 4); // 确保正确初始化 grid 数组
+        String[] values = gameState.split(",");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                gridNumber.grid[i][j] = Integer.parseInt(values[i * 4 + j]);
+            }
+        }
+        return gridNumber;
+    }
+
+    public static GridNumber fromString2(String gameState) {
+        GridNumber gridNumber = new GridNumber(5, 5); // 确保正确初始化 grid 数组
+        String[] values = gameState.split(",");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                gridNumber.grid[i][j] = Integer.parseInt(values[i * 4 + j]);
+            }
+        }
+        return gridNumber;
+    }
+
+    public static GridNumber fromString3(String gameState) {
+        GridNumber gridNumber = new GridNumber(6, 6); // 确保正确初始化 grid 数组
         String[] values = gameState.split(",");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -75,9 +107,16 @@ public class GridNumber implements Serializable {
         }
 
         this.If = false;
+        this.toolestimate2=0;
+        this.toolchangenumber=0;
+        this.change = new ArrayList<>();
+        this.change_x=0;
+        this.change_y=0;
+        this.lastscore=0;
     }
 
     public void moveRight() {
+        int kk=0;
         int[][] A = new int[this.X_COUNT][this.Y_COUNT];
 
         int i;
@@ -118,6 +157,10 @@ public class GridNumber implements Serializable {
 
                     if (news.get(m) == news.get(m + 1)) {
                         news1.add(1 + (Integer)news.get(m));
+                        if((Integer)news.get(m)==8){
+                            this.toolestimate2++;
+                            this.toolchangenumber++;
+                        }
                         k = 1;
 
                         for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
@@ -125,6 +168,7 @@ public class GridNumber implements Serializable {
                         }
 
                         this.scores += k;
+                        kk+=k;
                         news.set(m, 0);
                         news.set(m + 1, 0);
                     }
@@ -166,6 +210,7 @@ public class GridNumber implements Serializable {
         if (i < this.X_COUNT * this.Y_COUNT) {
             this.If = false;
             ++this.steps;
+            this.lastscore=kk;
 
             for(a = 0; a < this.laststep.length; ++a) {
                 for(b = 0; b < this.laststep[a].length; ++b) {
@@ -195,6 +240,7 @@ public class GridNumber implements Serializable {
     }
 
     public void moveLeft() {
+        int kk=0;
         int[][] A = new int[this.X_COUNT][this.Y_COUNT];
 
         int i;
@@ -235,6 +281,10 @@ public class GridNumber implements Serializable {
 
                     if (news.get(m) == news.get(m + 1)) {
                         news1.add(1 + (Integer)news.get(m));
+                        if((Integer)news.get(m)==8){
+                            this.toolestimate2++;
+                            this.toolchangenumber++;
+                        }
                         k = 1;
 
                         for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
@@ -242,6 +292,7 @@ public class GridNumber implements Serializable {
                         }
 
                         this.scores += k;
+                        kk+=k;
                         news.set(m, 0);
                         news.set(m + 1, 0);
                     }
@@ -283,6 +334,7 @@ public class GridNumber implements Serializable {
         if (i < this.X_COUNT * this.Y_COUNT) {
             this.If = false;
             ++this.steps;
+            this.lastscore=kk;
 
             for(a = 0; a < this.laststep.length; ++a) {
                 for(b = 0; b < this.laststep[a].length; ++b) {
@@ -312,6 +364,7 @@ public class GridNumber implements Serializable {
     }
 
     public void moveUp() {
+        int kk=0;
         int[][] A = new int[this.X_COUNT][this.Y_COUNT];
 
         int i;
@@ -352,6 +405,10 @@ public class GridNumber implements Serializable {
 
                     if (news.get(m) == news.get(m + 1)) {
                         news1.add(1 + (Integer)news.get(m));
+                        if((Integer)news.get(m)==8){
+                            this.toolestimate2++;
+                            this.toolchangenumber++;
+                        }
                         k = 1;
 
                         for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
@@ -359,6 +416,7 @@ public class GridNumber implements Serializable {
                         }
 
                         this.scores += k;
+                        kk+=k;
                         news.set(m, 0);
                         news.set(m + 1, 0);
                     }
@@ -400,6 +458,7 @@ public class GridNumber implements Serializable {
         if (i < this.X_COUNT * this.Y_COUNT) {
             this.If = false;
             ++this.steps;
+            this.lastscore=kk;
 
             for(a = 0; a < this.laststep.length; ++a) {
                 for(b = 0; b < this.laststep[a].length; ++b) {
@@ -429,6 +488,7 @@ public class GridNumber implements Serializable {
     }
 
     public void moveDown() {
+        int kk=0;
         int[][] A = new int[this.X_COUNT][this.Y_COUNT];
 
         int i;
@@ -469,6 +529,10 @@ public class GridNumber implements Serializable {
 
                     if (news.get(m) == news.get(m + 1)) {
                         news1.add(1 + (Integer)news.get(m));
+                        if((Integer)news.get(m)==8){
+                            this.toolestimate2++;
+                            this.toolchangenumber++;
+                        }
                         k = 1;
 
                         for(int s = 0; s < 1 + (Integer)news.get(m); ++s) {
@@ -476,6 +540,7 @@ public class GridNumber implements Serializable {
                         }
 
                         this.scores += k;
+                        kk+=k;
                         news.set(m, 0);
                         news.set(m + 1, 0);
                     }
@@ -517,6 +582,7 @@ public class GridNumber implements Serializable {
         if (i < this.X_COUNT * this.Y_COUNT) {
             this.If = false;
             ++this.steps;
+            this.lastscore=kk;
 
             for(a = 0; a < this.laststep.length; ++a) {
                 for(b = 0; b < this.laststep[a].length; ++b) {
@@ -545,6 +611,70 @@ public class GridNumber implements Serializable {
 
     }
 
+    public boolean iftoolestimate2(){
+        if(toolestimate2==0){
+            return true;
+            //弹出没有该道具的提醒框
+        }else{
+
+            return false;
+            //使用了一个道具
+        }
+
+    }
+public void dis2(){
+        for(int i=0;i<this.numbers.length;i++){
+            for(int j=0;j<this.numbers[i].length;j++){
+                if(this.numbers[i][j]==1){
+                    this.numbers[i][j]=0;
+                }
+            }
+        }
+        toolestimate2--;
+    }
+
+    public boolean iftoolchangenumber() {
+        if (toolchangenumber == 0) {
+            return true;
+            //弹出没有该道具的提醒框
+        } else {
+            return false;
+            //弹出该道具的使用框（输入要改的位置）
+        }
+    }
+    public boolean usetoolchangenumber(int x, int y){
+        if(this.numbers[x][y]<=6 && this.numbers[x][y]>=1){
+            this.change_x=x;
+            this.change_y=y;
+            return true;
+            //弹出改数字框 change数组
+        }else
+            return false;
+        //弹出该格子不可更改的提醒框
+    }
+
+    public void setchangenumber(int a){
+        changenumber=a;
+    }
+    public boolean dotoolchangenumber(){
+        if(changenumber!=2 && changenumber!=4 && changenumber!=8 && changenumber!=16 && changenumber!=32 && changenumber!=64){
+            return false;
+            //弹出不可更改为该数的提醒框
+        }
+        if(changenumber==this.numbers[change_x][change_y]){
+            return false;
+            //弹出不可更改为该数的提醒框
+        }
+        this.numbers[change_x][change_y]=changenumber;
+        this.toolchangenumber--;
+        return true;
+        //成功更改
+    }
+public void change(){
+    this.numbers[change_x][change_y]=changenumber;
+    this.toolchangenumber--;
+}
+
     public int getSteps() {
         return this.steps;
     }
@@ -563,6 +693,9 @@ public class GridNumber implements Serializable {
                 this.numbers[i][j] = this.laststep[i][j];
             }
         }
+        this.steps--;
+        this.scores-=this.lastscore;
+
 
     }
 

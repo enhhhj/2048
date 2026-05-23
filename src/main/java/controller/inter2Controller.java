@@ -1,7 +1,7 @@
 package src.main.java.controller;
 
-import com.sun.javafx.stage.EmbeddedWindow;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,14 +17,18 @@ import javafx.util.Duration;
 import src.main.java.model.GridNumber;
 import src.main.java.model.Information;
 import src.main.java.model.Storage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
+
+
+
+
+import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
-public class InterfaceController {
+public class inter2Controller extends InterfaceController {
+
 
     @FXML
     private AnchorPane AnchorPane_score;
@@ -48,16 +52,16 @@ public class InterfaceController {
     private Button Button_Up;
 
     @FXML
+    private Button Button_dis;
+
+    @FXML
     private Button Button_withdraw;
 
     @FXML
-    private GridPane GridPane_numbers;
-
-    @FXML
-    private Button Button_dis;
-    @FXML
     private Button Button_xiao;
 
+    @FXML
+    private GridPane GridPane_numbers;
 
     @FXML
     private ImageView Label_num00;
@@ -72,6 +76,9 @@ public class InterfaceController {
     private ImageView Label_num03;
 
     @FXML
+    private ImageView Label_num04;
+
+    @FXML
     private ImageView Label_num10;
 
     @FXML
@@ -82,6 +89,9 @@ public class InterfaceController {
 
     @FXML
     private ImageView Label_num13;
+
+    @FXML
+    private ImageView Label_num14;
 
     @FXML
     private ImageView Label_num20;
@@ -96,6 +106,9 @@ public class InterfaceController {
     private ImageView Label_num23;
 
     @FXML
+    private ImageView Label_num24;
+
+    @FXML
     private ImageView Label_num30;
 
     @FXML
@@ -108,24 +121,36 @@ public class InterfaceController {
     private ImageView Label_num33;
 
     @FXML
+    private ImageView Label_num34;
+
+    @FXML
+    private ImageView Label_num40;
+
+    @FXML
+    private ImageView Label_num41;
+
+    @FXML
+    private ImageView Label_num42;
+
+    @FXML
+    private ImageView Label_num43;
+
+    @FXML
+    private ImageView Label_num44;
+    @FXML
     private Label Label_score;
 
     @FXML
-    private Label Label_score1;
-
-    @FXML
-    private Label Label_scorenum1;
-
-    @FXML
     private Label Label_stepnum;
+    private ImageView[][] labels;
+
+
 
     private GridNumber grid;
-    private ImageView[][] labels;
+
     private int steps;
     private int score;
     private Information user;
-
-
 
     public void setUser(Information user) {
         this.user = user;
@@ -137,28 +162,29 @@ public class InterfaceController {
         // 从用户的游戏状态字符串中解析出游戏状态，并初始化 grid 对象
         String gameState = user.getGameState();
         if (gameState != null && !gameState.isEmpty()) {
-            this.grid = GridNumber.fromString1(gameState);
+            this.grid = GridNumber.fromString2(gameState);
         } else {
-            this.grid = new GridNumber(5, 5);
+            this.grid = new GridNumber(4, 4);
         }
         updateGrid();
     }
-
     @FXML
     public void initialize() {
         labels = new ImageView[][]{
-                {Label_num00, Label_num01, Label_num02, Label_num03},
-                {Label_num10, Label_num11, Label_num12, Label_num13},
-                {Label_num20, Label_num21, Label_num22, Label_num23},
-                {Label_num30, Label_num31, Label_num32, Label_num33}
+                {Label_num00, Label_num01, Label_num02, Label_num03, Label_num04},
+                {Label_num10, Label_num11, Label_num12, Label_num13, Label_num14},
+                {Label_num20, Label_num21, Label_num22, Label_num23, Label_num24},
+                {Label_num30, Label_num31, Label_num32, Label_num33, Label_num34},
+                {Label_num40, Label_num41, Label_num42, Label_num43, Label_num44}
         };
         steps = 0;
         score = 0;
 
         // 初始化 grid 变量
-        grid = new GridNumber(4, 4);
+        grid = new GridNumber(5, 5);
         updateGrid();
     }
+
 
     public void setGrid(GridNumber grid) {
         this.grid = grid;
@@ -166,9 +192,10 @@ public class InterfaceController {
     }
 
 
+
     public void updateGrid() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 int number = (int) grid.getNumber(i, j);
 
                 if (number == 0) {
@@ -184,38 +211,6 @@ public class InterfaceController {
 
     @FXML
     private void handleButtonUp() {
-        grid.moveUp();
-        updateGrid();
-
-        if (grid.iffailure()) {
-            showGameOverDialog();
-        }
-        if (grid.ifMove()) {
-            showReturnDialog();
-        }
-        if (grid.ifsuccess()) {
-            showGameSuccessDialog();
-        }
-    }
-
-    @FXML
-    private void handleButtonDown() {
-        grid.moveDown();
-        updateGrid();
-
-        if (grid.iffailure()) {
-            showGameOverDialog();
-        }
-        if (grid.ifMove()) {
-            showReturnDialog();
-        }
-        if (grid.ifsuccess()) {
-            showGameSuccessDialog();
-        }
-    }
-
-    @FXML
-    private void handleButtonLeft() {
         grid.moveLeft();
         updateGrid();
 
@@ -231,7 +226,7 @@ public class InterfaceController {
     }
 
     @FXML
-    private void handleButtonRight() {
+    private void handleButtonDown() {
         grid.moveRight();
         updateGrid();
 
@@ -247,8 +242,40 @@ public class InterfaceController {
     }
 
     @FXML
+    private void handleButtonLeft() {
+        grid.moveUp();
+        updateGrid();
+
+        if (grid.iffailure()) {
+            showGameOverDialog();
+        }
+        if (grid.ifMove()) {
+            showReturnDialog();
+        }
+        if (grid.ifsuccess()) {
+            showGameSuccessDialog();
+        }
+    }
+
+    @FXML
+    private void handleButtonRight() {
+        grid.moveDown();
+        updateGrid();
+
+        if (grid.iffailure()) {
+            showGameOverDialog();
+        }
+        if (grid.ifMove()) {
+            showReturnDialog();
+        }
+        if (grid.ifsuccess()) {
+            showGameSuccessDialog();
+        }
+    }
+
+    @FXML
     private void handleButtonWithdraw() {
-    grid.Withdraw();
+        grid.Withdraw();
         updateGrid();
 
     }
@@ -292,13 +319,12 @@ public class InterfaceController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Return.fxml"));
             Parent root = fxmlLoader.load();
-            src.main.java.controller.ReturnController controller = fxmlLoader.getController();
-            controller.setMainController(this); // 确保设置 mainController
+            ReturnController controller = fxmlLoader.getController();
+            controller.setMainController(this);
             Stage stage = new Stage();
-            stage.setTitle("方向错了");
+            stage.setTitle("方向错啦");
             stage.setScene(new Scene(root));
             stage.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -308,7 +334,7 @@ public class InterfaceController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GameSuccess.fxml"));
             Parent root = fxmlLoader.load();
-            src.main.java.controller.GameSuccessController controller = fxmlLoader.getController();
+            GamefailController controller = fxmlLoader.getController();
             controller.setMainController(this); // 确保设置 mainController
             Stage stage = new Stage();
             stage.setTitle("游戏成功");
@@ -324,6 +350,7 @@ public class InterfaceController {
         transition.setToY(4);
         transition.play();
     }
+
     @FXML
     private void handleButtondis() throws IOException {
         if(grid.iftoolestimate2())
@@ -343,6 +370,7 @@ public class InterfaceController {
 
         }
     }
+
     public  void handleButtonxiao()  {
         if (grid.iftoolchangenumber()) {
 
@@ -375,4 +403,7 @@ public class InterfaceController {
         }
 
 
-    }}
+    }
+
+}
+
