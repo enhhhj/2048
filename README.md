@@ -72,45 +72,6 @@ D:\apache-maven-3.9.6\bin\mvn.cmd javafx:run
 
 应用启动后会打开 JavaFX 窗口，关闭窗口后命令才会结束。
 
-## 构建
-
-如果只想检查项目是否能编译和打包，可以运行：
-
-```sh
-mvn -DskipTests package
-```
-
-Windows 上也可以使用：
-
-```sh
-D:\apache-maven-3.9.6\bin\mvn.cmd -DskipTests package
-```
-
-如果需要清理旧的构建产物后重新打包，可以运行：
-
-```sh
-mvn clean package
-```
-
-构建产物会生成在 `target/` 目录中，该目录不应提交到 GitHub。
-
-## 本地数据
-
-游戏会使用 `storage.dat` 保存本地用户和分数数据。该文件属于本机运行数据，不建议上传到 GitHub。
-
-## GitHub 上传注意事项
-
-上传前请确认以下内容没有被提交：
-
-- `.idea/`
-- `out/`
-- `target/`
-- `storage.dat`
-- `lib/*.jar`
-- `*.class`
-- `.env` 或其他密钥文件
-
-依赖应由 Maven 根据 `pom.xml` 自动下载，不需要把 JavaFX jar 包提交到仓库。
 
 ## 已知整理点
 
